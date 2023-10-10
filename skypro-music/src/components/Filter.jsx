@@ -1,4 +1,4 @@
-import "../../App.css";
+import "../App.css";
 function Filter() {
   return (
     <div className="centerblock__filter filter">

@@ -1,4 +1,4 @@
-import "../../App.css";
+import "../App.css";
 function NavMyPlaylist() {
   return (
     <li className="menu__item">

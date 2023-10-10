@@ -1,7 +1,7 @@
-import "../../App.css";
+import "../App.css";
 import Search from "./Search";
 import Filter from "./Filter";
-function mainCenterblok() {
+function MainCenterblok() {
   return (
     <div className="main__centerblock centerblock">
       <Search />
@@ -578,4 +578,4 @@ function mainCenterblok() {
     </div>
   );
 }
-export default mainCenterblok;
+export default MainCenterblok;

@@ -1,4 +1,4 @@
-import "../../App.css";
+import "../App.css";
 import NavMyPlaylist from "./MyPlaylist";
 import SighInButton from "./SingIn";
 import NavMain from "./Main";

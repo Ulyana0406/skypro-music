@@ -1,4 +1,4 @@
-import "../../App.css";
+import "../App.css";
 function SighInButton() {
   return (
     <li className="menu__item">

@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import sideBar from "./components/SideBar";
-import mainCenterblok from "./components/TrackList";
+import SideBar from "./components/SideBar";
+import MainCenterblok from "./components/TrackList";
 import NavMenu from "./components/NavMenu";
 import AudioPlayer from "./components/AudioPlayer";
 
@@ -11,8 +11,8 @@ function App() {
       <div className="container">
         <main className="main">
           <NavMenu />
-          <mainCenterblok />
-          <sideBar />
+          <MainCenterblok />
+          <SideBar />
         </main>
         <AudioPlayer />
         <footer className="footer"></footer>
