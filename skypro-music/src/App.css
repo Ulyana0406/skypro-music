@@ -775,3 +775,6 @@ body {
 .volume__progress-line {
   width: 109px;
 }
+.click_button {
+  cursor: pointer;
+}
