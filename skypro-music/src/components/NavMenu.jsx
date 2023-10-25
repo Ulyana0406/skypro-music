@@ -4,35 +4,37 @@ import NavMyPlaylist from "./MyPlaylist";
 import SighInButton from "./SingIn";
 import NavMain from "./Main";
 import React from "react";
+import * as S from "./NavMenu.styles";
+
 function NavMenu() {
   const [visible, setVisible] = useState(false);
 
   return (
-    <nav className="main__nav nav">
-      <div className="nav__logo logo">
-        <img className="logo__image" src="img/logo.png" alt="logo" />
-      </div>
+    <S.MainNav>
+      <S.NavLogo>
+        <S.LogoImg src="img/logo.png" alt="logo" />
+      </S.NavLogo>
 
-      <div className="nav__burger burger">
+      <S.Burger>
         <div
           onClick={() => {
             setVisible(!visible);
           }}
           role="button"
         >
-          <img className="click_button" src="img/burger.png" alt="logo" />
+          <S.ClickButton src="img/burger.png" alt="logo" />
         </div>
-      </div>
-      <div className="nav__menu menu">
+      </S.Burger>
+      <S.NavMenu>
         {visible && (
-          <ul className="menu__list">
+          <S.MenuList>
             <NavMain />
             <NavMyPlaylist />
             <SighInButton />
-          </ul>
+          </S.MenuList>
         )}
-      </div>
-    </nav>
+      </S.NavMenu>
+    </S.MainNav>
   );
 }
 export default NavMenu;

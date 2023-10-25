@@ -1,24 +1,26 @@
 import "../App.css";
 import React, { useState } from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import * as S from "./SideBar.styles";
+//const S. = S..div``
 function SideBar() {
   const [isLoading, setLoading] = useState(false);
   setTimeout(() => {
     setLoading(true);
   }, 4000);
   return (
-    <div className="main__sidebar sidebar">
-      <div className="sidebar__personal">
-        <p className="sidebar__personal-name">Sergey.Ivanov</p>
-        <div className="sidebar__icon">
+    <S.MainSidebar>
+      <S.SideBarPersonal>
+        <S.SideBarPersonalName>Sergey.Ivanov</S.SideBarPersonalName>
+        <S.SideBarIcon>
           <svg alt="logout">
             <use xlinkHref="img/icon/sprite.svg#logout"></use>
           </svg>
-        </div>
-      </div>
-      <div className="sidebar__block">
-        <div className="sidebar__list">
-          <div className="sidebar__item">
+        </S.SideBarIcon>
+      </S.SideBarPersonal>
+      <S.SideBarBlock>
+        <S.SideBarList>
+          <S.SideItem>
             <SkeletonTheme
               baseColor="#313131"
               highlightColor="#fff"
@@ -26,19 +28,15 @@ function SideBar() {
               width={250}
             >
               {isLoading ? (
-                <a className="sidebar__link" href="#">
-                  <img
-                    className="sidebar__img"
-                    src="img/playlist01.png"
-                    alt="day's playlist"
-                  />
-                </a>
+                <S.SideBarLink href="#">
+                  <S.SideBarImg src="img/playlist01.png" alt="day's playlist" />
+                </S.SideBarLink>
               ) : (
                 <Skeleton />
               )}
             </SkeletonTheme>
-          </div>
-          <div className="sidebar__item">
+          </S.SideItem>
+          <S.SideItem>
             <SkeletonTheme
               baseColor="#313131"
               highlightColor="#fff"
@@ -46,19 +44,15 @@ function SideBar() {
               width={250}
             >
               {isLoading ? (
-                <a className="sidebar__link" href="#">
-                  <img
-                    className="sidebar__img"
-                    src="img/playlist02.png"
-                    alt="day's playlist"
-                  />
-                </a>
+                <S.SideBarLink href="#">
+                  <S.SideBarImg src="img/playlist02.png" alt="day's playlist" />
+                </S.SideBarLink>
               ) : (
                 <Skeleton />
               )}
             </SkeletonTheme>
-          </div>
-          <div className="sidebar__item">
+          </S.SideItem>
+          <S.SideItem>
             <SkeletonTheme
               baseColor="#313131"
               highlightColor="#fff"
@@ -66,21 +60,17 @@ function SideBar() {
               width={250}
             >
               {isLoading ? (
-                <a className="sidebar__link" href="#">
-                  <img
-                    className="sidebar__img"
-                    src="img/playlist03.png"
-                    alt="day's playlist"
-                  />
-                </a>
+                <S.SideBarLink href="#">
+                  <S.SideBarImg src="img/playlist03.png" alt="day's playlist" />
+                </S.SideBarLink>
               ) : (
                 <Skeleton />
               )}
             </SkeletonTheme>
-          </div>
-        </div>
-      </div>
-    </div>
+          </S.SideItem>
+        </S.SideBarList>
+      </S.SideBarBlock>
+    </S.MainSidebar>
   );
 }
 export default SideBar;

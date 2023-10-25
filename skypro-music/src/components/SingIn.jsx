@@ -1,11 +1,10 @@
 import "../App.css";
+import * as S from "./NavMenu.styles";
 function SighInButton() {
   return (
-    <li className="menu__item">
-      <a href="../signin.html" className="menu__link">
-        Войти
-      </a>
-    </li>
+    <S.MenuItem>
+      <S.Menulink href="../signin.html">Войти</S.Menulink>
+    </S.MenuItem>
   );
 }
 

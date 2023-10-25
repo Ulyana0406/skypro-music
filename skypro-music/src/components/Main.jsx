@@ -1,11 +1,11 @@
 import "../App.css";
+import * as S from "./NavMenu.styles";
+
 function NavMain() {
   return (
-    <li className="menu__item">
-      <a href="/#" className="menu__link">
-        Главное
-      </a>
-    </li>
+    <S.MenuItem>
+      <S.Menulink href="/#">Главное</S.Menulink>
+    </S.MenuItem>
   );
 }
 

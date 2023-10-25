@@ -6,29 +6,31 @@ import NavMenu from "./components/NavMenu";
 import AudioPlayer from "./components/AudioPlayer";
 import Search from "./components/Search";
 import Filter from "./components/Filter";
+import * as S from "./App.styles";
+//const S. = S..div``
 function App() {
   return (
-    <div className="wrapper">
-      <div className="container">
-        <main className="main">
+    <S.Wrapper>
+      <S.Container>
+        <S.Main>
           <NavMenu />
-          <div className="main__centerblock centerblock">
+          <S.MainCentrBlock>
             <Search />
-            <h2 className="centerblock__h2">Треки</h2>
+            <S.Centerh2>Треки</S.Centerh2>
             <Filter />
-            <div className="centerblock__content">
-              <div className="content__title playlist-title">
-                <div className="playlist-title__col col01">Трек</div>
-                <div className="playlist-title__col col02">ИСПОЛНИТЕЛЬ</div>
-                <div className="playlist-title__col col03">АЛЬБОМ</div>
-                <div className="playlist-title__col col04">
-                  <svg className="playlist-title__svg" alt="time">
+            <S.CenterblockContent>
+              <S.ContentTitle>
+                <S.PlaylistTitleCol1>Трек</S.PlaylistTitleCol1>
+                <S.PlaylistTitleCol2>ИСПОЛНИТЕЛЬ</S.PlaylistTitleCol2>
+                <S.PlaylistTitleCol3>АЛЬБОМ</S.PlaylistTitleCol3>
+                <S.PlaylistTitleCol4>
+                  <S.PlayListTitleSvg alt="time">
                     <use xlinkHref="img/icon/sprite.svg#icon-watch"></use>
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <div className="content__playlist playlist">
+                  </S.PlayListTitleSvg>
+                </S.PlaylistTitleCol4>
+              </S.ContentTitle>
+            </S.CenterblockContent>
+            <S.ContentPlayList>
               <MainCenterblok
                 trackName="Guilt"
                 trackAuthor="Nero"
@@ -89,14 +91,14 @@ function App() {
                 album="Soundz Made in Romania"
                 trackTime="3.36"
               />
-            </div>
-          </div>
+            </S.ContentPlayList>
+          </S.MainCentrBlock>
           <SideBar />
-        </main>
+        </S.Main>
         <AudioPlayer />
         <footer className="footer"></footer>
-      </div>
-    </div>
+      </S.Container>
+    </S.Wrapper>
   );
 }
 

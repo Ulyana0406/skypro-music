@@ -1,80 +1,47 @@
 import React, { useState } from "react";
 import "../components/Filter.css";
-
+import * as S from "./Filter.styles";
+//const S. = S..div``
 function FilterList(activeFilter) {
   if (activeFilter === "author") {
     return (
-      <div className="modal">
-        <div className="modal__content">
-          <a href="#" className="modal__content_text">
-            MACAN
-          </a>
-          <a href="#" className="modal__content_text">
-            XCX
-          </a>
-          <a href="#" className="modal__content_text">
-            Rihanna
-          </a>
-          <a href="#" className="modal__content_text">
-            DVRST
-          </a>
-          <a href="#" className="modal__content_text">
-            Aarne
-          </a>
-          <a href="#" className="modal__content_text">
-            Jony
-          </a>
-        </div>
-      </div>
+      <S.Modal>
+        <S.ModalContent>
+          <S.ModalContentText href="#">MACAN</S.ModalContentText>
+          <S.ModalContentText href="#">XCX</S.ModalContentText>
+          <S.ModalContentText href="#">Rihanna</S.ModalContentText>
+          <S.ModalContentText href="#">DVRST</S.ModalContentText>
+          <S.ModalContentText href="#">Aarne</S.ModalContentText>
+          <S.ModalContentText href="#">Jony</S.ModalContentText>
+        </S.ModalContent>
+      </S.Modal>
     );
   }
   if (activeFilter === "year") {
     return (
-      <div className="modal">
-        <div className="modal__content">
-          <a href="#" className="modal__content_text">
-            1998
-          </a>
-          <a href="#" className="modal__content_text">
-            2000
-          </a>
-          <a href="#" className="modal__content_text">
-            2017
-          </a>
-          <a href="#" className="modal__content_text">
-            2020
-          </a>{" "}
-          <a href="#" className="modal__content_text">
-            2021
-          </a>{" "}
-          <a href="#" className="modal__content_text">
-            2023
-          </a>
-        </div>
-      </div>
+      <S.Modal>
+        <S.ModalContent>
+          <S.ModalContentText href="#">1998</S.ModalContentText>
+          <S.ModalContentText href="#">2000</S.ModalContentText>
+          <S.ModalContentText href="#">2017</S.ModalContentText>
+          <S.ModalContentText href="#">2020</S.ModalContentText>{" "}
+          <S.ModalContentText href="#">2021</S.ModalContentText>{" "}
+          <S.ModalContentText href="#">2023</S.ModalContentText>
+        </S.ModalContent>
+      </S.Modal>
     );
   }
   if (activeFilter === "genre") {
     return (
-      <div className="modal">
-        <div className="modal__content">
-          <a href="#" className="modal__content_text">
-            Хип-хоп
-          </a>
-          <a href="#" className="modal__content_text">
-            Рок
-          </a>
-          <a href="#" className="modal__content_text">
-            Поп-музыка
-          </a>
-          <a href="#" className="modal__content_text">
-            Техно
-          </a>
-          <a href="#" className="modal__content_text">
-            Инди
-          </a>
-        </div>
-      </div>
+      <S.Modal>
+        <S.ModalContent>
+          <S.ModalContentText href="#">Хип-хоп</S.ModalContentText>
+          <S.ModalContentText href="#">Рок</S.ModalContentText>
+          <S.ModalContentText href="#">Поп-музыка</S.ModalContentText>
+          <S.ModalContentText href="#">Техно</S.ModalContentText>
+          <S.ModalContentText href="#">Инди</S.ModalContentText>
+        </S.ModalContent>
+      </S.Modal>
     );
   }
 }
@@ -82,11 +49,9 @@ function FilterList(activeFilter) {
 function Filter() {
   const [activeFilter, setActiveFilter] = useState();
   return (
-    <div className="centerblock__filter filter">
-      <div className="filter__title">Искать по:</div>
-
-      <div
-        className="filter__button button-author _btn-text"
+    <S.CenterblockFilter>
+      <S.FilterTitle>Искать по:</S.FilterTitle>
+      <S.FilterButton
         onClick={() =>
           activeFilter !== "author"
             ? setActiveFilter("author")
@@ -96,10 +61,9 @@ function Filter() {
         {" "}
         исполнителю
         {activeFilter === "author" && FilterList(activeFilter)}
-      </div>
+      </S.FilterButton>
 
-      <div
-        className="filter__button button-year _btn-text"
+      <S.FilterButton
         onClick={() =>
           activeFilter !== "year" ? setActiveFilter("year") : setActiveFilter()
         }
@@ -107,10 +71,9 @@ function Filter() {
         {" "}
         году выпуска
         {activeFilter === "year" && FilterList(activeFilter)}
-      </div>
+      </S.FilterButton>
 
-      <div
-        className="filter__button button-genre _btn-text"
+      <S.FilterButton
         onClick={() =>
           activeFilter !== "genre"
             ? setActiveFilter("genre")
@@ -119,8 +82,8 @@ function Filter() {
       >
         жанру
         {activeFilter === "genre" && FilterList(activeFilter)}
-      </div>
-    </div>
+      </S.FilterButton>
+    </S.CenterblockFilter>
   );
 }
 export default Filter;
