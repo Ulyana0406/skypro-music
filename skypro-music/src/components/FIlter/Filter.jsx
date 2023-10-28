@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import "../components/Filter.css";
 import * as S from "./Filter.styles";
 //const S. = S..div``
-function FilterList(activeFilter) {
+export function FilterList(activeFilter) {
   if (activeFilter === "author") {
     return (
       <S.Modal>
@@ -35,18 +34,18 @@ function FilterList(activeFilter) {
     return (
       <S.Modal>
         <S.ModalContent>
-          <S.ModalContentText href="#">Хип-хоп</S.ModalContentText>
-          <S.ModalContentText href="#">Рок</S.ModalContentText>
-          <S.ModalContentText href="#">Поп-музыка</S.ModalContentText>
-          <S.ModalContentText href="#">Техно</S.ModalContentText>
-          <S.ModalContentText href="#">Инди</S.ModalContentText>
+          <S.ModalContentText href="#">Hip-hop</S.ModalContentText>
+          <S.ModalContentText href="#">Rock</S.ModalContentText>
+          <S.ModalContentText href="#">Pop music</S.ModalContentText>
+          <S.ModalContentText href="#">Techno</S.ModalContentText>
+          <S.ModalContentText href="#">Indie</S.ModalContentText>
         </S.ModalContent>
       </S.Modal>
     );
   }
 }
 
-function Filter() {
+export function Filter() {
   const [activeFilter, setActiveFilter] = useState();
   return (
     <S.CenterblockFilter>
@@ -86,4 +85,3 @@ function Filter() {
     </S.CenterblockFilter>
   );
 }
-export default Filter;

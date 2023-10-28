@@ -1,12 +1,11 @@
 import { useState } from "react";
-import "../App.css";
-import NavMyPlaylist from "./MyPlaylist";
-import SighInButton from "./SingIn";
-import NavMain from "./Main";
+import { NavMyPlaylist } from "../MyPlaylist";
+import { SighInButton } from "../SingIn";
+import { NavMain } from "../Main";
 import React from "react";
 import * as S from "./NavMenu.styles";
 
-function NavMenu() {
+export function NavMenu() {
   const [visible, setVisible] = useState(false);
 
   return (
@@ -37,4 +36,4 @@ function NavMenu() {
     </S.MainNav>
   );
 }
-export default NavMenu;
+

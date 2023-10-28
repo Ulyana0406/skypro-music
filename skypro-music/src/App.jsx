@@ -1,16 +1,18 @@
 import React from "react";
 import "./App.css";
-import SideBar from "./components/SideBar";
-import MainCenterblok from "./components/TrackList";
-import NavMenu from "./components/NavMenu";
-import AudioPlayer from "./components/AudioPlayer";
-import Search from "./components/Search";
-import Filter from "./components/Filter";
+import { SideBar } from "./components/SideBar/SideBar";
+import { MainCenterblok } from "./components/TrackList/TrackList";
+import { NavMenu } from "./components/NavMenu/NavMenu";
+import { AudioPlayer } from "./components/AudiopPayer/AudioPlayer";
+import { Search } from "./components/Search/Search";
+import { Filter } from "./components/FIlter/Filter";
 import * as S from "./App.styles";
+import GlobalStyle from "./globalStyles";
 //const S. = S..div``
 function App() {
   return (
     <S.Wrapper>
+      <GlobalStyle />
       <S.Container>
         <S.Main>
           <NavMenu />

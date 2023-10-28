@@ -1,12 +1,10 @@
 import "../App.css";
-import * as S from "./NavMenu.styles";
+import * as S from "./NavMenu/NavMenu.styles";
 
-function NavMain() {
+export function NavMain() {
   return (
     <S.MenuItem>
       <S.Menulink href="/#">Главное</S.Menulink>
     </S.MenuItem>
   );
 }
-
-export default NavMain;

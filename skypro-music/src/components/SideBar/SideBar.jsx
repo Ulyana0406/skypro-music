@@ -1,9 +1,8 @@
-import "../App.css";
 import React, { useState } from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import * as S from "./SideBar.styles";
 //const S. = S..div``
-function SideBar() {
+export function SideBar() {
   const [isLoading, setLoading] = useState(false);
   setTimeout(() => {
     setLoading(true);
@@ -73,4 +72,3 @@ function SideBar() {
     </S.MainSidebar>
   );
 }
-export default SideBar;

@@ -1,10 +1,9 @@
 import { useState } from "react";
-import "../App.css";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import * as S from "./TrackList.styles";
 
-function MainCenterblok(props) {
+export function MainCenterblok(props) {
   const [isLoading, setLoading] = useState(false);
   setTimeout(() => {
     setLoading(true);
@@ -89,4 +88,3 @@ function MainCenterblok(props) {
     </S.PlayListItem>
   );
 }
-export default MainCenterblok;

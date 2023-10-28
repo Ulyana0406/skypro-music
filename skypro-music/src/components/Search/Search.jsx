@@ -1,6 +1,5 @@
-import "../App.css";
 import * as S from "./Search.styles";
-function Search() {
+export function Search() {
   return (
     <S.CenterSearch>
       <S.Svg>
@@ -10,4 +9,3 @@ function Search() {
     </S.CenterSearch>
   );
 }
-export default Search;

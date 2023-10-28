@@ -1,7 +1,6 @@
-import "../App.css";
 import * as S from "./AudioPlayer.styles";
 
-function AudioPlayer() {
+export function AudioPlayer() {
   return (
     <S.Bar>
       <S.BarContent>
@@ -84,5 +83,3 @@ function AudioPlayer() {
     </S.Bar>
   );
 }
-
-export default AudioPlayer;
