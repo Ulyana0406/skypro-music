@@ -28,9 +28,7 @@
   border-radius: 60px;
   padding: 6px 20px;
 }
-.filter__button:active {
-  border-color: #ad61ff;
-}
+
 .filter__button:not(:last-child) {
   margin-right: 10px;
 }

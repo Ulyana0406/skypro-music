@@ -1,12 +1,9 @@
 import "../App.css";
-function NavMyPlaylist() {
+import * as S from "./NavMenu/NavMenu.styles";
+export function NavMyPlaylist() {
   return (
-    <li className="menu__item">
-      <a href="/#" className="menu__link">
-        Мой плейлист
-      </a>
-    </li>
+    <S.MenuItem>
+      <S.Menulink href="/#">Мой плейлист</S.Menulink>
+    </S.MenuItem>
   );
 }
-
-export default NavMyPlaylist;

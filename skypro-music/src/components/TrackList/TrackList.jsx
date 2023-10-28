@@ -1,24 +1,25 @@
 import { useState } from "react";
-import "../App.css";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-function MainCenterblok(props) {
+import * as S from "./TrackList.styles";
+
+export function MainCenterblok(props) {
   const [isLoading, setLoading] = useState(false);
   setTimeout(() => {
     setLoading(true);
   }, 4000);
   return (
-    <div className="playlist__item">
-      <div className="playlist__track track">
-        <div className="track__title">
+    <S.PlayListItem>
+      <S.PlayListTrack>
+        <S.TrackTitle>
           {/* <SkeletonTheme baseColor="#cf6565" highlightColor="#ff0">
                       <p><Skeleton /></p>
                     </SkeletonTheme> */}
-          <div className="track__title-image">
+          <S.TrackTitleImg>
             {isLoading ? (
-              <svg className="track__title-svg" alt="music">
+              <S.TrackTitleSvg alt="music">
                 <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-              </svg>
+              </S.TrackTitleSvg>
             ) : (
               <Skeleton />
             )}
@@ -26,8 +27,8 @@ function MainCenterblok(props) {
                           <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
                         </svg>
                         </svg> */}
-          </div>
-          <div className="track__title-text">
+          </S.TrackTitleImg>
+          <S.TrackTitleText>
             <SkeletonTheme
               baseColor="#313131"
               highlightColor="#fff"
@@ -35,16 +36,16 @@ function MainCenterblok(props) {
               width={356}
             >
               {isLoading ? (
-                <a className="track__title-link" href="http://">
-                  {props.trackName} <span className="track__title-span"></span>
-                </a>
+                <S.TrackTitleLink href="http://">
+                  {props.trackName} <S.TrackTitleSpan></S.TrackTitleSpan>
+                </S.TrackTitleLink>
               ) : (
                 <Skeleton />
               )}
             </SkeletonTheme>
-          </div>
-        </div>
-        <div className="track__author">
+          </S.TrackTitleText>
+        </S.TrackTitle>
+        <S.TrackAuthor>
           <SkeletonTheme
             baseColor="#313131"
             highlightColor="#fff"
@@ -52,15 +53,15 @@ function MainCenterblok(props) {
             width={272}
           >
             {isLoading ? (
-              <a className="track__author-link" href="http://">
+              <S.TrackAuthorLink href="http://">
                 {props.trackAuthor}
-              </a>
+              </S.TrackAuthorLink>
             ) : (
               <Skeleton />
             )}
           </SkeletonTheme>
-        </div>
-        <div className="track__album">
+        </S.TrackAuthor>
+        <S.TrackAlbum>
           <SkeletonTheme
             baseColor="#313131"
             highlightColor="#fff"
@@ -68,25 +69,22 @@ function MainCenterblok(props) {
             width={250}
           >
             {isLoading ? (
-              <a className="track__album-link" href="http://">
-                {props.album}
-              </a>
+              <S.TrackAlbumLink href="http://">{props.album}</S.TrackAlbumLink>
             ) : (
               <Skeleton />
             )}
           </SkeletonTheme>
-        </div>
-        <div className="track__time">
-          <svg className="track__time-svg" alt="time">
+        </S.TrackAlbum>
+        <S.TrackTime>
+          <S.TrackTimeSvg alt="time">
             <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-          </svg>
-          <span className="track__time-text">
+          </S.TrackTimeSvg>
+          <S.TrackTimeText>
             {" "}
             {isLoading ? props.trackTime : "0.00"}
-          </span>
-        </div>
-      </div>
-    </div>
+          </S.TrackTimeText>
+        </S.TrackTime>
+      </S.PlayListTrack>
+    </S.PlayListItem>
   );
 }
-export default MainCenterblok;
