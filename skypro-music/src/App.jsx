@@ -6,6 +6,7 @@ import GlobalStyle from "./globalStyles";
 import { AppRoutes } from "./routes";
 //const S. = S..div``
 function App() {
+  //localStorage.setItem("user");
   const token = Cookies.get("token");
   console.log(token);
 
