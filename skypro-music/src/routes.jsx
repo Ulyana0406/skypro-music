@@ -8,14 +8,14 @@ import { CategoryTwo } from "./pages/Categories/Categories2";
 import { CategoryThree } from "./pages/Categories/Categories3";
 import { ProtectedRoute } from "./components/protected-route/protected";
 import { Registr } from "./pages/Registr/Registr";
-export const AppRoutes = ({ token }) => {
+export const AppRoutes = ({ user }) => {
   return (
     <Routes>
       <Route path="/myplaylist" element={<MyPlaylist />} />
       <Route
         path="/"
         element={
-          <ProtectedRoute isAllowed={Boolean(token)}>
+          <ProtectedRoute isAllowed={Boolean(user)}>
             <MainPage />
           </ProtectedRoute>
         }
