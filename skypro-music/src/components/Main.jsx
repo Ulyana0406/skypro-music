@@ -1,10 +1,10 @@
 import "../App.css";
 import * as S from "./NavMenu/NavMenu.styles";
-
+import { StyledLink } from "./NavMenu/NavMenu.styles";
 export function NavMain() {
   return (
     <S.MenuItem>
-      <S.Menulink href="/#">Главное</S.Menulink>
+      <StyledLink to="/main">Главное</StyledLink>
     </S.MenuItem>
   );
 }

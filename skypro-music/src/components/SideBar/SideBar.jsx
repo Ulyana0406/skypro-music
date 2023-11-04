@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import * as S from "./SideBar.styles";
+import { SidebarLink } from "./SideBar.styles";
 //const S. = S..div``
 export function SideBar() {
   const [isLoading, setLoading] = useState(false);
@@ -27,9 +28,9 @@ export function SideBar() {
               width={250}
             >
               {isLoading ? (
-                <S.SideBarLink href="#">
+                <SidebarLink to="/category/1">
                   <S.SideBarImg src="img/playlist01.png" alt="day's playlist" />
-                </S.SideBarLink>
+                </SidebarLink>
               ) : (
                 <Skeleton />
               )}
@@ -43,9 +44,9 @@ export function SideBar() {
               width={250}
             >
               {isLoading ? (
-                <S.SideBarLink href="#">
+                <SidebarLink to="/category/2">
                   <S.SideBarImg src="img/playlist02.png" alt="day's playlist" />
-                </S.SideBarLink>
+                </SidebarLink>
               ) : (
                 <Skeleton />
               )}
@@ -59,9 +60,9 @@ export function SideBar() {
               width={250}
             >
               {isLoading ? (
-                <S.SideBarLink href="#">
+                <SidebarLink to="/category/3">
                   <S.SideBarImg src="img/playlist03.png" alt="day's playlist" />
-                </S.SideBarLink>
+                </SidebarLink>
               ) : (
                 <Skeleton />
               )}
