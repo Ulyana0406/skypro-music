@@ -4,18 +4,14 @@ import "./App.css";
 import * as S from "./App.styles";
 import GlobalStyle from "./globalStyles";
 import { AppRoutes } from "./routes";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 //const S. = S..div``
 function App() {
   //localStorage.setItem("user");
-
-  useEffect(() => {
-    localStorage.setItem("user", "1234");
-  }, []);
-  const user = localStorage.getItem("user");
+  const [user, setUser] = useState(localStorage.getItem("user"));
   return (
     <S.Wrapper>
-      <AppRoutes user={user} />
+      <AppRoutes setUser={setUser} user={user} />
       <GlobalStyle />
     </S.Wrapper>
   );

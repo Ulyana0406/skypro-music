@@ -8,24 +8,19 @@ import { CategoryTwo } from "./pages/Categories/Categories2";
 import { CategoryThree } from "./pages/Categories/Categories3";
 import { ProtectedRoute } from "./components/protected-route/protected";
 import { Registr } from "./pages/Registr/Registr";
-export const AppRoutes = ({ user }) => {
+export const AppRoutes = ({ user, setUser }) => {
   return (
     <Routes>
-      <Route path="/myplaylist" element={<MyPlaylist />} />
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute isAllowed={Boolean(user)}>
-            <MainPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route path="/signin" element={<Login />} />
       <Route path="*" element={<NotFound />} />
-      <Route path="/category1" element={<CategoryOne />} />
-      <Route path="/category2" element={<CategoryTwo />} />
-      <Route path="/category3" element={<CategoryThree />} />
+      <Route path="/signin" element={<Login setUser={setUser} />} />
       <Route path="/registr" element={<Registr />} />
+      <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
+        <Route path="/myplaylist" element={<MyPlaylist />} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/category/:id" element={<CategoryOne />} />
+        {/* <Route path="/category2" element={<CategoryTwo />} />
+      <Route path="/category3" element={<CategoryThree />} /> */}
+      </Route>
     </Routes>
   );
 };

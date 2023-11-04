@@ -28,7 +28,7 @@ export function SideBar() {
               width={250}
             >
               {isLoading ? (
-                <SidebarLink to="/category1">
+                <SidebarLink to="/category/1">
                   <S.SideBarImg src="img/playlist01.png" alt="day's playlist" />
                 </SidebarLink>
               ) : (
@@ -44,7 +44,7 @@ export function SideBar() {
               width={250}
             >
               {isLoading ? (
-                <SidebarLink to="/category2">
+                <SidebarLink to="/category/2">
                   <S.SideBarImg src="img/playlist02.png" alt="day's playlist" />
                 </SidebarLink>
               ) : (
@@ -60,7 +60,7 @@ export function SideBar() {
               width={250}
             >
               {isLoading ? (
-                <SidebarLink to="/category3">
+                <SidebarLink to="/category/3">
                   <S.SideBarImg src="img/playlist03.png" alt="day's playlist" />
                 </SidebarLink>
               ) : (
