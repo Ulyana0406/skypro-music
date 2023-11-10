@@ -5,7 +5,20 @@ import { AudioPlayer } from "./../../components/AudiopPayer/AudioPlayer";
 import { Search } from "./../../components/Search/Search";
 import { Filter } from "./../../components/FIlter/Filter";
 import * as S from "./../../App.styles";
-export const MainPage = () => {
+import { getPlayList } from "../../api";
+import { useState, useEffect } from "react";
+//import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+export const MainPage = (currentTrack, setCurrentTrack) => {
+  const [allTracks, setAllTracks] = useState([]);
+
+  //setLoading(true);
+  useEffect(() => {
+    getPlayList().then((lists) => {
+      console.log(lists);
+      setAllTracks(lists);
+    });
+  }, []);
+  //setLoading(false);
   return (
     <S.Container>
       <S.Main>
@@ -26,68 +39,20 @@ export const MainPage = () => {
               </S.PlaylistTitleCol4>
             </S.ContentTitle>
           </S.CenterblockContent>
-          <S.ContentPlayList>
-            <MainCenterblok
-              trackName="Guilt"
-              trackAuthor="Nero"
-              album="Weloome Reality"
-              trackTime="4.44"
-            />
-            <MainCenterblok
-              trackName="Elektro"
-              trackAuthor="Dynoro, Outwork, Mr. Gee"
-              album="Elektro"
-              trackTime="2.22"
-            />
-            <MainCenterblok
-              trackName="I’m Fire"
-              trackAuthor="Ali Bakgor"
-              album="I’m Fire"
-              trackTime="2.22"
-            />
-            <MainCenterblok
-              trackName="Non Stop"
-              trackAuthor="Стоункат, Psychopath"
-              album="Weloome Reality"
-              trackTime="4.12"
-            />
-            <MainCenterblok
-              trackName="Run Run"
-              trackAuthor="Jaded, Will Clarke, AR/CO"
-              album="Run Run"
-              trackTime="2.54"
-            />
-            <MainCenterblok
-              trackName="Eyes on Fire"
-              trackAuthor="Blue Foundation, Zeds Dead"
-              album="Eyes on Fire"
-              trackTime="5.20"
-            />
-            <MainCenterblok
-              trackName="Mucho Bien"
-              trackAuthor="HYBIT, Mr. Black, Offer Nissim, Hi Profile"
-              album="Mucho Bien"
-              trackTime="3.41"
-            />
-            <MainCenterblok
-              trackName="Knives n Cherries"
-              trackAuthor="minthaze"
-              album="Captivating"
-              trackTime="1.48"
-            />
-            <MainCenterblok
-              trackName="How Deep Is Your Love"
-              trackAuthor="Calvin Harris, Disciples"
-              album="How Deep Is Your Love"
-              trackTime="3.32"
-            />
-            <MainCenterblok
-              trackName="Morena"
-              trackAuthor="Tom Boxer"
-              album="Soundz Made in Romania"
-              trackTime="3.36"
-            />
-          </S.ContentPlayList>
+          {allTracks.map((oneTrack) => {
+            return (
+              <S.ContentPlayList>
+                <MainCenterblok
+                  key={oneTrack.id}
+                  oneTrack={oneTrack}
+                  trackName={oneTrack.name}
+                  trackAuthor={oneTrack.author}
+                  album={oneTrack.album}
+                  trackTime={oneTrack.duration_in_seconds}
+                />
+              </S.ContentPlayList>
+            );
+          })}
         </S.MainCentrBlock>
         <SideBar />
       </S.Main>
