@@ -8,7 +8,12 @@ import * as S from "./../../App.styles";
 import { getPlayList } from "../../api";
 import { useState, useEffect } from "react";
 //import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-export const MainPage = (currentTrack, setCurrentTrack) => {
+export const MainPage = ({
+  currentTrack,
+  setCurrentTrack,
+  isLoading,
+  setLoading,
+}) => {
   const [allTracks, setAllTracks] = useState([]);
 
   //setLoading(true);
@@ -42,14 +47,7 @@ export const MainPage = (currentTrack, setCurrentTrack) => {
           {allTracks.map((oneTrack) => {
             return (
               <S.ContentPlayList>
-                <MainCenterblok
-                  key={oneTrack.id}
-                  oneTrack={oneTrack}
-                  trackName={oneTrack.name}
-                  trackAuthor={oneTrack.author}
-                  album={oneTrack.album}
-                  trackTime={oneTrack.duration_in_seconds}
-                />
+                <MainCenterblok isLoading={isLoading} setLoading={setLoading} />
               </S.ContentPlayList>
             );
           })}
