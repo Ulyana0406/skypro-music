@@ -23,7 +23,7 @@ export function MainCenterblok({ isLoading, setLoading }) {
   return (
     <>
       {allTracks.map((oneTrack) => {
-        <S.PlayListItem>
+        <S.PlayListItem key={oneTrack.id}>
           <S.PlayListTrack>
             <S.TrackTitle>
               {/* <SkeletonTheme baseColor="#cf6565" highlightColor="#ff0">
@@ -97,7 +97,7 @@ export function MainCenterblok({ isLoading, setLoading }) {
               </S.TrackTimeSvg>
               <S.TrackTimeText>
                 {" "}
-                {!isLoading
+                {isLoading
                   ? (oneTrack.duration_in_seconds / 60).toFixed(2)
                   : "0.00"}
               </S.TrackTimeText>

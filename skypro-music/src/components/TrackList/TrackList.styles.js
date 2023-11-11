@@ -4,6 +4,7 @@ export const PlayListItem = styled.div`
   width: 100%;
   display: block;
   margin-bottom: 12px;
+  overflow: scroll;
 `;
 export const PlayListTrack = styled.div`
   display: -webkit-box;

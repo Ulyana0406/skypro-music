@@ -4,8 +4,8 @@ import { MyPlaylist } from "./pages/MyTracks/MyTracks";
 import { NotFound } from "./pages/NotFound/NotFound";
 import { Login } from "./pages/Login/Login";
 import { CategoryOne } from "./pages/Categories/Categories";
-import { CategoryTwo } from "./pages/Categories/Categories2";
-import { CategoryThree } from "./pages/Categories/Categories3";
+//import { CategoryTwo } from "./pages/Categories/Categories2";
+//import { CategoryThree } from "./pages/Categories/Categories3";
 import { ProtectedRoute } from "./components/protected-route/protected";
 import { Registr } from "./pages/Registr/Registr";
 export const AppRoutes = ({ user, setUser, isLoading, setLoading }) => {
