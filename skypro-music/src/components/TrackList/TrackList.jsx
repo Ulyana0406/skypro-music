@@ -24,7 +24,10 @@ export function MainCenterblok({ isLoading, setLoading, setCurrentTrack }) {
     <>
       {allTracks.map((oneTrack) => {
         return (
-          <S.PlayListItem key={oneTrack.id}>
+          <S.PlayListItem
+            onClick={() => setCurrentTrack(oneTrack)}
+            key={oneTrack.id}
+          >
             <S.PlayListTrack>
               <S.TrackTitle>
                 {/* <SkeletonTheme baseColor="#cf6565" highlightColor="#ff0">

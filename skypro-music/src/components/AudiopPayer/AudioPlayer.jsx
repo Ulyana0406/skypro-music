@@ -1,6 +1,6 @@
 import * as S from "./AudioPlayer.styles";
 
-export function AudioPlayer(currentTrack) {
+export function AudioPlayer({ currentTrack }) {
   return (
     <S.Bar>
       <S.BarContent>
