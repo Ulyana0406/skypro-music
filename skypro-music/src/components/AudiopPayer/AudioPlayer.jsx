@@ -1,6 +1,6 @@
 import * as S from "./AudioPlayer.styles";
 
-export function AudioPlayer() {
+export function AudioPlayer(currentTrack) {
   return (
     <S.Bar>
       <S.BarContent>
@@ -43,12 +43,12 @@ export function AudioPlayer() {
                 </S.trackPlayimg>
                 <S.TrackPlayAuthor>
                   <S.TrackPlayAuthorLink href="http://">
-                    Ты та...
+                    {currentTrack.name}
                   </S.TrackPlayAuthorLink>
                 </S.TrackPlayAuthor>
                 <S.TrackPlayAlbum>
                   <S.TrackPlayAlbumLink href="http://">
-                    Баста
+                    {currentTrack.author}
                   </S.TrackPlayAlbumLink>
                 </S.TrackPlayAlbum>
               </S.trackPlayContain>

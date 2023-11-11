@@ -8,7 +8,14 @@ import { CategoryOne } from "./pages/Categories/Categories";
 //import { CategoryThree } from "./pages/Categories/Categories3";
 import { ProtectedRoute } from "./components/protected-route/protected";
 import { Registr } from "./pages/Registr/Registr";
-export const AppRoutes = ({ user, setUser, isLoading, setLoading }) => {
+export const AppRoutes = ({
+  user,
+  setUser,
+  isLoading,
+  setLoading,
+  currentTrack,
+  setCurrentTrack,
+}) => {
   return (
     <Routes>
       <Route path="*" element={<NotFound />} />
@@ -18,9 +25,17 @@ export const AppRoutes = ({ user, setUser, isLoading, setLoading }) => {
         <Route path="/myplaylist" element={<MyPlaylist />} />
         <Route
           path="/"
-          element={<MainPage isLoading={isLoading} setLoading={setLoading} />}
+          element={
+            <MainPage
+              isLoading={isLoading}
+              setLoading={setLoading}
+              currentTrack={currentTrack}
+              setCurrentTrack={setCurrentTrack}
+            />
+          }
         />
         <Route path="/category/:id" element={<CategoryOne />} />
+
         {/* <Route path="/category2" element={<CategoryTwo />} />
       <Route path="/category3" element={<CategoryThree />} /> */}
       </Route>

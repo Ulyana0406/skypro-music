@@ -4,7 +4,9 @@ export async function getPlayList() {
   );
 
   if (!Response.ok) {
-    throw new Error("Ошибка сервера");
+    if (Response.status === 500) {
+      throw new Error("Ошибка сервера");
+    }
   }
 
   const data = await Response.json();

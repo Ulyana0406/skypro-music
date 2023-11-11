@@ -14,15 +14,6 @@ export const MainPage = ({
   isLoading,
   setLoading,
 }) => {
-  const [allTracks, setAllTracks] = useState([]);
-
-  //setLoading(true);
-  useEffect(() => {
-    getPlayList().then((lists) => {
-      console.log(lists);
-      setAllTracks(lists);
-    });
-  }, []);
   //setLoading(false);
   return (
     <S.Container>
@@ -44,17 +35,20 @@ export const MainPage = ({
               </S.PlaylistTitleCol4>
             </S.ContentTitle>
           </S.CenterblockContent>
-          {allTracks.map((oneTrack) => {
-            return (
-              <S.ContentPlayList>
-                <MainCenterblok isLoading={isLoading} setLoading={setLoading} />
-              </S.ContentPlayList>
-            );
-          })}
+          <S.ContentPlayList>
+            <MainCenterblok
+              isLoading={isLoading}
+              setLoading={setLoading}
+              setCurrentTrack={setCurrentTrack}
+            />
+          </S.ContentPlayList>
         </S.MainCentrBlock>
         <SideBar />
       </S.Main>
-      <AudioPlayer />
+      <AudioPlayer
+        currentTrack={currentTrack}
+        setCurrentTrack={setCurrentTrack}
+      />
       <footer className="footer"></footer>
     </S.Container>
   );
