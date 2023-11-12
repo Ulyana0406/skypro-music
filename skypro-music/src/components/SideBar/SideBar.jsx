@@ -7,7 +7,7 @@ export function SideBar() {
   const [isLoading, setLoading] = useState(false);
   setTimeout(() => {
     setLoading(true);
-  }, 4000);
+  }, 2000);
   return (
     <S.MainSidebar>
       <S.SideBarPersonal>

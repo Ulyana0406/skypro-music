@@ -13,7 +13,11 @@ export function MainCenterblok({ isLoading, setLoading, setCurrentTrack }) {
       .then((lists) => {
         setAllTracks(lists);
       })
-      .finally(() => setLoading(false))
+      .finally(() =>
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000)
+      )
       .catch((error) => setError(error.message));
   }, []);
   if (error) {
