@@ -32,6 +32,7 @@ export const TrackTitle = styled.div`
   -ms-flex-align: center;
   align-items: center;
   width: 447px;
+  cursor: pointer;
 `;
 export const TrackAuthor = styled.div`
   width: 321px;
@@ -41,9 +42,11 @@ export const TrackAuthor = styled.div`
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: flex-start;
+  cursor: pointer;
 `;
 export const TrackAlbum = styled.div`
   width: 245px;
+  cursor: pointer;
 `;
 export const TrackTime = styled.div``;
 export const TrackTitleImg = styled.div`
