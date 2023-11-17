@@ -5,14 +5,16 @@ import { AudioPlayer } from "./../../components/AudiopPayer/AudioPlayer";
 import { Search } from "./../../components/Search/Search";
 import { Filter } from "./../../components/FIlter/Filter";
 import * as S from "./../../App.styles";
-import { getPlayList } from "../../api";
-import { useState, useEffect } from "react";
+//import { getPlayList } from "../../api";
+//import { useState, useEffect } from "react";
 //import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 export const MainPage = ({
   currentTrack,
   setCurrentTrack,
   isLoading,
   setLoading,
+  volume,
+  setVolume,
 }) => {
   //setLoading(false);
   return (
@@ -48,6 +50,8 @@ export const MainPage = ({
       <AudioPlayer
         currentTrack={currentTrack}
         setCurrentTrack={setCurrentTrack}
+        volume={volume}
+        setVolume={setVolume}
       />
       <footer className="footer"></footer>
     </S.Container>
