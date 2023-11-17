@@ -22,7 +22,7 @@ export function AudioPlayer({ currentTrack, volume, setVolume }) {
         setDuration(0);
       }
     };
-    ref.addEventListener("timeUpdate", updateEvent);
+    ref.addEventListener("timeupdate", updateEvent);
     return () => {
       ref.removeEventListener("timeupdate", updateEvent);
     };
