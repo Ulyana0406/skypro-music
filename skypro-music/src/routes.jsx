@@ -15,6 +15,8 @@ export const AppRoutes = ({
   setLoading,
   currentTrack,
   setCurrentTrack,
+  volume,
+  setVolume,
 }) => {
   return (
     <Routes>
@@ -31,6 +33,8 @@ export const AppRoutes = ({
               setLoading={setLoading}
               currentTrack={currentTrack}
               setCurrentTrack={setCurrentTrack}
+              volume={volume}
+              setVolume={setVolume}
             />
           }
         />

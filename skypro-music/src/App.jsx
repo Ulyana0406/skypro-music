@@ -12,6 +12,7 @@ function App() {
   const [isLoading, setLoading] = useState(false);
   const [currentTrack, setCurrentTrack] = useState([]);
   const [user, setUser] = useState(localStorage.getItem("user"));
+  const [volume, setVolume] = useState(0.4);
   return (
     <S.Wrapper>
       <AppRoutes
@@ -21,6 +22,8 @@ function App() {
         user={user}
         currentTrack={currentTrack}
         setCurrentTrack={setCurrentTrack}
+        volume={volume}
+        setVolume={setVolume}
       />
       <GlobalStyle />
     </S.Wrapper>
