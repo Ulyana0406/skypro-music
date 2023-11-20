@@ -21,7 +21,7 @@ export const AppRoutes = ({
   return (
     <Routes>
       <Route path="*" element={<NotFound />} />
-      <Route path="/signin" element={<Login setUser={setUser} />} />
+      <Route path="/signin" element={<Login />} />
       <Route path="/registr" element={<AuthPage />} />
       <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
         <Route path="/myplaylist" element={<MyPlaylist />} />

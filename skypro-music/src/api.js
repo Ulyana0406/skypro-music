@@ -1,7 +1,7 @@
 import { useState, useContext, createContext } from "react";
 import { AuthPage } from "./pages/Registr/Registr";
+import { Login } from "./pages/Login/Login";
 export const UserContext = createContext();
-export const useUser = () => useContext(UserContext);
 
 export async function getPlayList() {
   const Response = await fetch(
@@ -17,7 +17,7 @@ export async function getPlayList() {
   const data = await Response.json();
   return data;
 }
-export const UserProvider = () => {
+export const UserProvider = ({ AuthPage, Login }) => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
   const login = async (email, password) => {
@@ -40,7 +40,6 @@ export const UserProvider = () => {
   };
   const register = async (email, password, repeatPassword) => {
     try {
-      // Выполните запрос к API для регистрации пользователя
       const response = await fetch(
         "https://skypro-music-api.skyeng.tech/user/signup/",
         {
@@ -53,6 +52,7 @@ export const UserProvider = () => {
       );
       const data = await response.json();
       setUserData(data);
+      localStorage.setItem("userData", JSON.stringify(data));
     } catch (error) {
       setError("Ошибка регистрации");
     }
@@ -60,6 +60,7 @@ export const UserProvider = () => {
   return (
     <UserContext.Provider value={{ userData, error, login, register }}>
       <AuthPage />
+      <Login />
     </UserContext.Provider>
   );
 };
