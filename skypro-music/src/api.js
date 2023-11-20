@@ -2,6 +2,7 @@ import { useState, useContext, createContext } from "react";
 import { AuthPage } from "./pages/Registr/Registr";
 import { Login } from "./pages/Login/Login";
 export const UserContext = createContext();
+export const useUser = () => useContext(UserContext);
 
 export async function getPlayList() {
   const Response = await fetch(
