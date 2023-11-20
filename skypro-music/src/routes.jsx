@@ -7,7 +7,7 @@ import { CategoryOne } from "./pages/Categories/Categories";
 //import { CategoryTwo } from "./pages/Categories/Categories2";
 //import { CategoryThree } from "./pages/Categories/Categories3";
 import { ProtectedRoute } from "./components/protected-route/protected";
-import { Registr } from "./pages/Registr/Registr";
+import { AuthPage } from "./pages/Registr/Registr";
 export const AppRoutes = ({
   user,
   setUser,
@@ -22,7 +22,7 @@ export const AppRoutes = ({
     <Routes>
       <Route path="*" element={<NotFound />} />
       <Route path="/signin" element={<Login setUser={setUser} />} />
-      <Route path="/registr" element={<Registr />} />
+      <Route path="/registr" element={<AuthPage />} />
       <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
         <Route path="/myplaylist" element={<MyPlaylist />} />
         <Route
