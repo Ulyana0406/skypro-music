@@ -18,6 +18,7 @@ export function Login() {
   const [repeatPassword, setRepeatPassword] = useState("");
   const handleRegister = async () => {
     register(email, password, repeatPassword);
+
     if (email !== "") {
       console.log({ email });
     } else {
@@ -33,7 +34,7 @@ export function Login() {
     } else {
       setRegistrationError("Укажите идентичные пароли!");
     }
-    const response = await handleRegister({ email, password });
+    const response = await register({ email, password });
     if (response.status === 201) {
       alert(`Пользователь успешно зарегистрирован`);
     }
