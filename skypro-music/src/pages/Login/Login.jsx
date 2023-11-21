@@ -2,13 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useUser } from "../../App";
 import * as S from "./../Registr/AuthPage.styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function Login() {
   const navigate = useNavigate();
   const { register, error } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [registrationError, setRegistrationError] = useState("");
   //function onClick() {
   //  setUser("1234");
   //  localStorage.setItem("user", "1234");
@@ -17,8 +18,38 @@ export function Login() {
   const [repeatPassword, setRepeatPassword] = useState("");
   const handleRegister = async () => {
     register(email, password, repeatPassword);
-    navigate("/");
+    if (email !== "") {
+      console.log({ email });
+    } else {
+      setRegistrationError("Заполните почту!");
+    }
+    if (password !== "") {
+      console.log({ password });
+    } else {
+      setRegistrationError("Укажите пароль!");
+    }
+    if (password === repeatPassword) {
+      console.log({ repeatPassword });
+    } else {
+      setRegistrationError("Укажите идентичные пароли!");
+    }
+    const response = await handleRegister({ email, password });
+    if (response.status === 201) {
+      alert(`Пользователь успешно зарегистрирован`);
+    }
+
+    if (response.status === 400) {
+      alert(`произошла ошибка: ${response.email}, ${response.password}`);
+    }
+    if (response.status === 500) {
+      alert(`Ошибка соединения с сервером. Попробуйте чутка позже.`);
+    } else {
+      navigate("/");
+    }
   };
+  useEffect(() => {
+    setRegistrationError(null);
+  }, [email, password, repeatPassword]);
   return (
     <S.PageContainer>
       <S.ModalForm>
@@ -57,7 +88,9 @@ export function Login() {
             }}
           />
         </S.Inputs>
-        {error && <S.Error>{error}</S.Error>}
+        <div className="regErrors">
+          {registrationError ? registrationError : null}
+        </div>
         <S.Buttons>
           <S.PrimaryButton onClick={handleRegister}>
             Зарегистрироваться

@@ -12,3 +12,7 @@
 .audio {
   display: none;
 }
+
+.regErrors {
+  color: red;
+}
