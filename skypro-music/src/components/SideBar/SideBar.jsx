@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import * as S from "./SideBar.styles";
 import { SidebarLink } from "./SideBar.styles";
+import { useUser } from "../../App";
 //const S. = S..div``
-export function SideBar() {
+export function SideBar({ email }) {
+  const { userData } = useUser();
   const [isLoading, setLoading] = useState(false);
   setTimeout(() => {
     setLoading(true);
@@ -11,7 +13,7 @@ export function SideBar() {
   return (
     <S.MainSidebar>
       <S.SideBarPersonal>
-        <S.SideBarPersonalName>Sergey.Ivanov</S.SideBarPersonalName>
+        <S.SideBarPersonalName>ПРОБЛЕМА</S.SideBarPersonalName>
         <S.SideBarIcon>
           <svg alt="logout">
             <use xlinkHref="img/icon/sprite.svg#logout"></use>

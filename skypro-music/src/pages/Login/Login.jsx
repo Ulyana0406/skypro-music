@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useUser } from "../../api";
+import { useUser } from "../../App";
 import * as S from "./../Registr/AuthPage.styles";
 import { useState } from "react";
 

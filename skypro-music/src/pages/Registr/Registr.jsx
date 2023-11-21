@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as S from "./AuthPage.styles";
-import { useState, useNavigate } from "react";
-import { useUser } from "../../api";
+import { useState } from "react";
+import { useUser } from "../../App";
 
 export function AuthPage() {
   const navigate = useNavigate();
