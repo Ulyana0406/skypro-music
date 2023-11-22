@@ -35,18 +35,20 @@ export function Login() {
       setRegistrationError("Укажите идентичные пароли!");
     }
     const response = await register({ email, password });
-    if (response.status === 201) {
+    if (response?.status === 201) {
       alert(`Пользователь успешно зарегистрирован`);
+      return;
     }
 
-    if (response.status === 400) {
+    if (response?.status === 400) {
       alert(`произошла ошибка: ${response.email}, ${response.password}`);
+      return;
     }
-    if (response.status === 500) {
+    if (response?.status === 500) {
       alert(`Ошибка соединения с сервером. Попробуйте чутка позже.`);
-    } else {
-      navigate("/");
+      return;
     }
+    navigate("/");
   };
   useEffect(() => {
     setRegistrationError(null);
