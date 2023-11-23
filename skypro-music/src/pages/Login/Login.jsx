@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 export function Login() {
   const navigate = useNavigate();
-  const { register, error } = useUser();
+  const { register } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [registrationError, setRegistrationError] = useState("");

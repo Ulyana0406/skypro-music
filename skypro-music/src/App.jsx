@@ -33,6 +33,7 @@ function App() {
       );
       const data = await response.json();
       setUserData(data);
+      localStorage.setItem("userData", JSON.stringify(data));
     } catch (error) {
       setError("Ошибка входа");
     }
@@ -46,12 +47,16 @@ function App() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, password, repeatPassword }),
+          body: JSON.stringify({
+            email,
+            password,
+            username: email,
+            repeatPassword,
+          }),
         }
       );
       const data = await response.json();
       setUserData(data);
-      localStorage.setItem("userData", JSON.stringify(data));
     } catch (error) {
       setError("Ошибка регистрации");
     }
