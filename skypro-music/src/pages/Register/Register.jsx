@@ -34,22 +34,21 @@ export function Register() {
       return;
     }
     const response = await register({ email, password });
-    console.log(response);
-    if (response?.status === 201) {
-      //register(email, password, repeatPassword);
-    }
 
     if (response?.status === 400) {
+      const res = await response.json();
+      setRegistrationError(res.email);
       alert(`Произошла ошибка: неверные данные`);
       return;
     }
     if (response?.status === 500) {
-      alert(`Ошибка соединения с сервером. Попробуйте чутка позже.`);
+      setRegistrationError(
+        `Ошибка соединения с сервером. Попробуйте чутка позже.`
+      );
       return;
     }
-    const res = await response;
-    localStorage.setItem("userData", res);
-    alert(`Пользователь успешно зарегистрирован`);
+    const res = await response.json();
+    localStorage.setItem("userData", JSON.stringify(res));
     navigate("/");
   };
   // useEffect(() => {
