@@ -13,7 +13,9 @@ export function SideBar() {
   return (
     <S.MainSidebar>
       <S.SideBarPersonal>
-        <S.SideBarPersonalName>{userData.email}</S.SideBarPersonalName>
+        <S.SideBarPersonalName>
+          {JSON.parse(localStorage.getItem("userData")).email}
+        </S.SideBarPersonalName>
         <S.SideBarIcon>
           <svg alt="logout">
             <use xlinkHref="img/icon/sprite.svg#logout"></use>

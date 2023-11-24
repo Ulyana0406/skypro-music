@@ -34,11 +34,12 @@ function App() {
       const data = await response.json();
       setUserData(data);
       localStorage.setItem("userData", JSON.stringify(data));
+      console.log(data);
     } catch (error) {
       setError("Ошибка входа");
     }
   };
-  const register = async (email, password, repeatPassword) => {
+  const register = async ({ email, password }) => {
     try {
       const response = await fetch(
         "https://skypro-music-api.skyeng.tech/user/signup/",
@@ -51,7 +52,6 @@ function App() {
             email,
             password,
             username: email,
-            repeatPassword,
           }),
         }
       );
