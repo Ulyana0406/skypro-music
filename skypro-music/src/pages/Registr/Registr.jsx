@@ -45,7 +45,7 @@ export function AuthPage() {
         {error && <S.Error>{error}</S.Error>}
         <S.Buttons>
           <S.PrimaryButton onClick={() => handleLogin()}>Войти</S.PrimaryButton>
-          <Link to="/signin">
+          <Link to="/registr">
             <S.SecondaryButton>Зарегистрироваться</S.SecondaryButton>
           </Link>
         </S.Buttons>
