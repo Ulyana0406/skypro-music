@@ -4,8 +4,7 @@ import * as S from "./SideBar.styles";
 import { SidebarLink } from "./SideBar.styles";
 import { useUser } from "../../App";
 //const S. = S..div``
-export function SideBar() {
-  const { userData } = useUser();
+export function SideBar({ user }) {
   const [isLoading, setLoading] = useState(false);
   setTimeout(() => {
     setLoading(true);
@@ -13,9 +12,7 @@ export function SideBar() {
   return (
     <S.MainSidebar>
       <S.SideBarPersonal>
-        <S.SideBarPersonalName>
-          {JSON.parse(localStorage.getItem("userData")).email}
-        </S.SideBarPersonalName>
+        <S.SideBarPersonalName>{user.email}</S.SideBarPersonalName>
         <S.SideBarIcon>
           <svg alt="logout">
             <use xlinkHref="img/icon/sprite.svg#logout"></use>
