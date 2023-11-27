@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import * as S from "../Login/AuthPage.styles";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { register } from "../../api";
 
 export function Register() {

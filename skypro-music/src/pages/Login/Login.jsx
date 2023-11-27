@@ -1,17 +1,30 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as S from "./AuthPage.styles";
 import { useState } from "react";
-import { useUser } from "../../App";
+import { useAuth } from "../../auth";
 
 export function Login() {
-  const navigate = useNavigate();
-  const { login, error } = useUser();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [error, setError] = useState(null);
   const handleLogin = async () => {
-    login(email, password);
-    navigate("/");
+    try {
+      const response = await fetch(
+        "	https://skypro-music-api.skyeng.tech/user/login/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
+      const data = await response.json();
+      login(data);
+    } catch (error) {
+      setError("Ошибка входа");
+    }
   };
 
   return (

@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import * as S from "./SideBar.styles";
 import { SidebarLink } from "./SideBar.styles";
-import { useUser } from "../../App";
+
+import { useAuth } from "../../auth";
 //const S. = S..div``
-export function SideBar({ user }) {
+export function SideBar() {
+  const { auth } = useAuth;
   const [isLoading, setLoading] = useState(false);
   setTimeout(() => {
     setLoading(true);
@@ -12,7 +14,7 @@ export function SideBar({ user }) {
   return (
     <S.MainSidebar>
       <S.SideBarPersonal>
-        <S.SideBarPersonalName>{user.email}</S.SideBarPersonalName>
+        <S.SideBarPersonalName>{auth.email}</S.SideBarPersonalName>
         <S.SideBarIcon>
           <svg alt="logout">
             <use xlinkHref="img/icon/sprite.svg#logout"></use>

@@ -2,6 +2,7 @@
 import "./App.css";
 //import Cookies from "js-cookie";
 import * as S from "./App.styles";
+import { WithAuth } from "./auth";
 import GlobalStyle from "./globalStyles";
 import { AppRoutes } from "./routes";
 import { useState } from "react";
@@ -14,62 +15,15 @@ function App() {
   //localStorage.setItem("user");
   const [isLoading, setLoading] = useState(false);
   const [currentTrack, setCurrentTrack] = useState([]);
-  const [user, setUser] = useState(localStorage.getItem("user"));
-  const [volume, setVolume] = useState(0.4);
-  const [userData, setUserData] = useState(null);
-  const [error, setError] = useState(null);
 
-  const login = async (email, password) => {
-    try {
-      const response = await fetch(
-        "	https://skypro-music-api.skyeng.tech/user/login/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
-      const data = await response.json();
-      setUserData(data);
-      localStorage.setItem("userData", JSON.stringify(data));
-      console.log(data);
-    } catch (error) {
-      setError("Ошибка входа");
-    }
-  };
-  const register = async ({ email, password }) => {
-    try {
-      const response = await fetch(
-        "https://skypro-music-api.skyeng.tech/user/signup/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            password,
-            username: email,
-          }),
-        }
-      );
-      const data = await response.json();
-      setUserData(data);
-    } catch (error) {
-      setError("Ошибка регистрации");
-    }
-  };
+  const [volume, setVolume] = useState(0.4);
 
   return (
-    <UserContext.Provider value={{ userData, error, login, register }}>
+    <WithAuth>
       <S.Wrapper>
         <AppRoutes
           isLoading={isLoading}
           setLoading={setLoading}
-          setUser={setUser}
-          user={user}
           currentTrack={currentTrack}
           setCurrentTrack={setCurrentTrack}
           volume={volume}
@@ -77,7 +31,7 @@ function App() {
         />
         <GlobalStyle />
       </S.Wrapper>
-    </UserContext.Provider>
+    </WithAuth>
   );
 }
 

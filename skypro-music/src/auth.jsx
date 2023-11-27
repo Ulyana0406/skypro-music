@@ -1,15 +1,13 @@
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import App from "./App";
-import { SideBar } from "./components/SideBar/SideBar";
+
 function getAuthFromLocalStorage() {
-  try {
-    return JSON.parse(localStorage.getItem("user"));
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+  return localStorage.getItem("user") ?? null;
 }
+export const useAuth = () => {
+  const user = useContext(AuthContext);
+  return user;
+};
 
 const AuthContext = createContext(null);
 
@@ -24,7 +22,7 @@ export const WithAuth = ({ children }) => {
   const logout = () => {
     setAuth(null);
     localStorage.removeItem("user");
-    navigate("/");
+    navigate("/signin");
   };
   return (
     <AuthContext.Provider
@@ -34,18 +32,7 @@ export const WithAuth = ({ children }) => {
         logout,
       }}
     >
-      <App />
+      {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = () => {
-  const user = useContext(AuthContext);
-  return user;
-};
-
-export const ContextSideBar = () => {
-  const user = useAuth();
-
-  return <SideBar user={user} />;
 };

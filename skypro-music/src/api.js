@@ -1,7 +1,3 @@
-import { useState } from "react";
-import { AuthPage } from "./pages/Login/Login";
-import { Login } from "./pages/Register/Register";
-
 export async function getPlayList() {
   const Response = await fetch(
     "https://skypro-music-api.skyeng.tech/catalog/track/all/"

@@ -9,8 +9,6 @@ import { CategoryOne } from "./pages/Categories/Categories";
 import { ProtectedRoute } from "./components/protected-route/protected";
 import { Login } from "./pages/Login/Login";
 export const AppRoutes = ({
-  user,
-  setUser,
   isLoading,
   setLoading,
   currentTrack,
