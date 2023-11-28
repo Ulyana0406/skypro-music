@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import * as S from "../Login/AuthPage.styles";
 import { useState } from "react";
 import { register } from "../../api";
+import { useAuth } from "../../auth";
 
 export function Register() {
-  const navigate = useNavigate();
   //const { register } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,6 +17,7 @@ export function Register() {
   //  navigate("/");
   // }
   const [repeatPassword, setRepeatPassword] = useState("");
+  const { login } = useAuth();
   const handleRegister = async () => {
     if (email === "") {
       console.log({ email });
@@ -47,9 +48,9 @@ export function Register() {
       );
       return;
     }
+
     const res = await response.json();
-    localStorage.setItem("userData", JSON.stringify(res));
-    navigate("/");
+    login(res);
   };
   // useEffect(() => {
   //   setRegistrationError(null);

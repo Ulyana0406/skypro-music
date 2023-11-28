@@ -8,7 +8,7 @@ import { useAuth } from "../../auth";
 export function SideBar() {
   const [isLoading, setLoading] = useState(false);
   const { auth } = useAuth();
-
+  console.log(auth);
   setTimeout(() => {
     setLoading(true);
   }, 2000);
