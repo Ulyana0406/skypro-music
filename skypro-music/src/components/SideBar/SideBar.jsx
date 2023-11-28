@@ -6,8 +6,9 @@ import { SidebarLink } from "./SideBar.styles";
 import { useAuth } from "../../auth";
 //const S. = S..div``
 export function SideBar() {
-  const { auth } = useAuth;
   const [isLoading, setLoading] = useState(false);
+  const { auth } = useAuth();
+
   setTimeout(() => {
     setLoading(true);
   }, 2000);
