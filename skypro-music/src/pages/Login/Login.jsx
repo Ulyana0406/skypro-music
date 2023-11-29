@@ -2,12 +2,13 @@ import { Link } from "react-router-dom";
 import * as S from "./AuthPage.styles";
 import { useState } from "react";
 import { useAuth } from "../../auth";
-
+import { useNavigate } from "react-router-dom";
 export function Login() {
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
   const handleLogin = async () => {
     try {
       const response = await fetch(
@@ -22,6 +23,7 @@ export function Login() {
       );
       const data = await response.json();
       login(data);
+      navigate("/");
     } catch (error) {
       setError("Ошибка входа");
     }
