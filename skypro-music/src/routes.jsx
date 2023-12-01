@@ -2,15 +2,13 @@ import { Routes, Route } from "react-router-dom";
 import { MainPage } from "./pages/Main/Main";
 import { MyPlaylist } from "./pages/MyTracks/MyTracks";
 import { NotFound } from "./pages/NotFound/NotFound";
-import { Login } from "./pages/Login/Login";
+import { Register } from "./pages/Register/Register";
 import { CategoryOne } from "./pages/Categories/Categories";
 //import { CategoryTwo } from "./pages/Categories/Categories2";
 //import { CategoryThree } from "./pages/Categories/Categories3";
 import { ProtectedRoute } from "./components/protected-route/protected";
-import { Registr } from "./pages/Registr/Registr";
+import { Login } from "./pages/Login/Login";
 export const AppRoutes = ({
-  user,
-  setUser,
   isLoading,
   setLoading,
   currentTrack,
@@ -21,9 +19,9 @@ export const AppRoutes = ({
   return (
     <Routes>
       <Route path="*" element={<NotFound />} />
-      <Route path="/signin" element={<Login setUser={setUser} />} />
-      <Route path="/registr" element={<Registr />} />
-      <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
+      <Route path="/registr" element={<Register />} />
+      <Route path="/signin" element={<Login />} />
+      <Route element={<ProtectedRoute />}>
         <Route path="/myplaylist" element={<MyPlaylist />} />
         <Route
           path="/"

@@ -4,7 +4,7 @@ import { StyledLink } from "./NavMenu/NavMenu.styles";
 export function NavMain() {
   return (
     <S.MenuItem>
-      <StyledLink to="/main">Главное</StyledLink>
+      <StyledLink to="/">Главное</StyledLink>
     </S.MenuItem>
   );
 }
