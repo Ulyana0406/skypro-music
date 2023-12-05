@@ -3,16 +3,29 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import * as S from "./TrackList.styles";
 import { getPlayList } from "../../api";
+import { useSelector } from "react-redux";
+import { playerSelector } from "../../store/selectors/selectors";
+import { useDispatch } from "react-redux";
+import {
+  nextTrack,
+  setCurrentTrack,
+} from "../../store/actions/creators/creators";
 export function MainCenterblok({
   isLoading,
   setLoading,
-  setCurrentTrack,
   isPlaying,
   setIsPlaying,
 }) {
   const [allTracks, setAllTracks] = useState([]);
   const [error, setError] = useState(null);
   const [trackId, setTrackId] = useState();
+  const dispatch = useDispatch();
+  const currentTrack = useSelector(
+    (state) => state.player.currentTrack.content
+  );
+  const isCurrentTrackPlaying = useSelector(
+    (state) => state.player.isPlayingTrack
+  );
   useEffect(() => {
     setLoading(true);
     getPlayList()
@@ -29,42 +42,42 @@ export function MainCenterblok({
   if (error) {
     return <div>Ошибка при получении треков: {error}</div>;
   }
-  const handleCurrentTrackId = ({ id }) => {
-    // setCurrentTrackId (id);
+  const handleCurrentTrackId = (oneTrack) => {
+    const isPlayingTrack = true;
+    dispatch(setCurrentTrack(oneTrack.id, oneTrack, isPlayingTrack, allTracks));
+  };
 
-    console.log(`currentTrack ID = ${id}`);
+  const setPlayItemImage = (oneTrack) => {
+    if (isLoading) {
+      return <Skeleton />;
+    }
 
-    setTrackId(id);
-    console.log(`setCurrentTrack = ${trackId}`);
+    if (isCurrentTrackPlaying === true && currentTrack?.id === oneTrack?.id) {
+      return <S.BlinkingDot alt="music"> </S.BlinkingDot>;
+    }
+
+    if (isCurrentTrackPlaying === false && currentTrack?.id === oneTrack?.id) {
+      return <S.PauseDot />;
+    } else {
+      return (
+        <S.TrackTitleSvg className="track__title-svg" alt="music">
+          {" "}
+          <use xlinkHref="img/icon/sprite.svg#icon-note"></use>{" "}
+        </S.TrackTitleSvg>
+      );
+    }
   };
   return (
     <>
       {allTracks.map((oneTrack) => {
         return (
-          <S.PlayListItem
-            onClick={() => setCurrentTrack(oneTrack)}
-            key={oneTrack.id}
-          >
+          <S.PlayListItem key={oneTrack.id}>
             <S.PlayListTrack>
               <S.TrackTitle>
                 {/* <SkeletonTheme baseColor="#cf6565" highlightColor="#ff0">
                       <p><Skeleton /></p>
                     </SkeletonTheme> */}
-                <S.TrackTitleImg>
-                  {!isLoading ? (
-                    isPlaying ? (
-                      <S.BlinkingDot className="track__title-svg" alt="music">
-                        {/* <use xlinkHref="img/icon/sprite.svg#icon-note"></use> */}
-                      </S.BlinkingDot>
-                    ) : (
-                      <S.TrackTitleSvg className="track__title-svg" alt="music">
-                        <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-                      </S.TrackTitleSvg>
-                    )
-                  ) : (
-                    <Skeleton />
-                  )}
-                </S.TrackTitleImg>
+                <S.TrackTitleImg>{setPlayItemImage(oneTrack)}</S.TrackTitleImg>
                 <S.TrackTitleText>
                   <SkeletonTheme
                     baseColor="#313131"
@@ -75,8 +88,7 @@ export function MainCenterblok({
                     {!isLoading ? (
                       <S.TrackTitleLink
                         onClick={() => {
-                          setCurrentTrack(oneTrack);
-                          handleCurrentTrackId({ id: oneTrack.id });
+                          handleCurrentTrackId(oneTrack);
                           setIsPlaying(true);
                         }}
                       >

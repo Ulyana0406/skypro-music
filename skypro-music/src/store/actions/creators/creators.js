@@ -5,9 +5,16 @@ import {
   TOGGLE_SUFFLED,
 } from "../types/types";
 
-export const setCurrentTrack = (content) => ({
+export const setCurrentTrack = (id, content, isPlayingTrack, allTracks) => ({
   type: SET_CURRENT_TRACK,
   payload: {
+    id,
     content,
+    isPlayingTrack,
+    allTracks,
   },
+});
+
+export const nextTrack = () => ({
+  type: NEXT_TRACK,
 });

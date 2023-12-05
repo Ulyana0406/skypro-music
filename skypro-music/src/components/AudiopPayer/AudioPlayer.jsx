@@ -2,15 +2,25 @@ import * as S from "./AudioPlayer.styles";
 import { useEffect, useRef, useState } from "react";
 import { ProgressBar } from "../ProgressBar/ProgressBar";
 import { VolumeContent } from "../Volume/Volume";
-export function AudioPlayer({ currentTrack, volume, setVolume }) {
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setCurrentTrack } from "../../store/actions/creators/creators";
+import { nextTrack, playerSelector } from "../../store/selectors/selectors";
+export function AudioPlayer({ volume, setVolume, isPlaying, setIsPlaying }) {
   const [isRepeated, setIsRepeated] = useState(false);
 
   const audioRef = useRef(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  const [isPlaying, setIsPlaying] = useState(false);
   const [isShuffled, setIsShuffled] = useState(false);
+  const currentTrack = useSelector(
+    (state) => state.player.currentTrack.content
+  );
+  const allIds = useSelector((state) => state.player.AllIds);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const ref = audioRef.current;
     const updateEvent = () => {
@@ -35,11 +45,15 @@ export function AudioPlayer({ currentTrack, volume, setVolume }) {
   const handleStart = () => {
     audioRef.current.play();
     setIsPlaying(true);
+    const isPlayingTrack = true;
+    dispatch(setCurrentTrack(currentTrack.id, currentTrack, isPlayingTrack));
   };
 
   const handleStop = () => {
     audioRef.current.pause();
     setIsPlaying(false);
+    const isPlayingTrack = false;
+    dispatch(setCurrentTrack(currentTrack.id, currentTrack, isPlayingTrack));
   };
   const setShuffle = () => {
     if (!isShuffled) {
@@ -62,6 +76,9 @@ export function AudioPlayer({ currentTrack, volume, setVolume }) {
   };
 
   const togglePlay = isPlaying ? handleStop : handleStart;
+  const handleNextTrack = () => {
+    dispatch(nextTrack());
+  };
   return (
     <>
       <S.Bar>
@@ -78,7 +95,6 @@ export function AudioPlayer({ currentTrack, volume, setVolume }) {
           <ProgressBar
             audioRef={audioRef}
             duration={duration}
-            currentTrack={currentTrack}
             currentTime={currentTime}
           />
           <S.PlayerBlock>
@@ -127,7 +143,7 @@ export function AudioPlayer({ currentTrack, volume, setVolume }) {
                     )}
                   </S.BtnPlaySvg>
                 </S.BtnPlay>
-                <S.BtnNext btnPrev={true} onClick={() => functionAlert()}>
+                <S.BtnNext btnPrev={true} onClick={() => handleNextTrack()}>
                   <S.BtnNextSvg alt="next">
                     <use xlinkHref="img/icon/sprite.svg#icon-next" />
                   </S.BtnNextSvg>

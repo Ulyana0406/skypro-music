@@ -5,11 +5,12 @@ import { AudioPlayer } from "./../../components/AudiopPayer/AudioPlayer";
 import { Search } from "./../../components/Search/Search";
 import { Filter } from "./../../components/FIlter/Filter";
 import * as S from "./../../App.styles";
+import { useSelector } from "react-redux";
+import { playerSelector } from "../../store/selectors/selectors";
 //import { getPlayList } from "../../api";
 //import { useState, useEffect } from "react";
 //import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 export const MainPage = ({
-  currentTrack,
   setCurrentTrack,
   isLoading,
   setLoading,
@@ -19,6 +20,7 @@ export const MainPage = ({
   setIsPlaying,
 }) => {
   //setLoading(false);
+  const currentTrackId = useSelector((state) => state.player.id);
   return (
     <S.Container>
       <S.Main>
@@ -43,7 +45,6 @@ export const MainPage = ({
             <MainCenterblok
               isLoading={isLoading}
               setLoading={setLoading}
-              setCurrentTrack={setCurrentTrack}
               isPlaying={isPlaying}
               setIsPlaying={setIsPlaying}
             />
@@ -52,10 +53,10 @@ export const MainPage = ({
         <SideBar />
       </S.Main>
       <AudioPlayer
-        currentTrack={currentTrack}
-        setCurrentTrack={setCurrentTrack}
         volume={volume}
         setVolume={setVolume}
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
       />
       <footer className="footer"></footer>
     </S.Container>
