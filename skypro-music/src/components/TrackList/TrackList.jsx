@@ -57,7 +57,6 @@ export function MainCenterblok({
     }
 
     if (isCurrentTrackPlaying === false && currentTrack?.id === oneTrack?.id) {
-      return <S.PauseDot />;
     } else {
       return (
         <S.TrackTitleSvg className="track__title-svg" alt="music">

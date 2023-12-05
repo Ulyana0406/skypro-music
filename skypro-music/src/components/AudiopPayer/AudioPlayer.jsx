@@ -4,8 +4,11 @@ import { ProgressBar } from "../ProgressBar/ProgressBar";
 import { VolumeContent } from "../Volume/Volume";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setCurrentTrack } from "../../store/actions/creators/creators";
-import { nextTrack, playerSelector } from "../../store/selectors/selectors";
+import {
+  nextTrack,
+  setCurrentTrack,
+} from "../../store/actions/creators/creators";
+import { playerSelector } from "../../store/selectors/selectors";
 export function AudioPlayer({ volume, setVolume, isPlaying, setIsPlaying }) {
   const [isRepeated, setIsRepeated] = useState(false);
 
