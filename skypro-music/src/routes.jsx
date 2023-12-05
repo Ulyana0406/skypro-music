@@ -15,6 +15,8 @@ export const AppRoutes = ({
   setCurrentTrack,
   volume,
   setVolume,
+  isPlaying,
+  setIsPlaying,
 }) => {
   return (
     <Routes>
@@ -33,6 +35,8 @@ export const AppRoutes = ({
               setCurrentTrack={setCurrentTrack}
               volume={volume}
               setVolume={setVolume}
+              isPlaying={isPlaying}
+              setIsPlaying={setIsPlaying}
             />
           }
         />

@@ -3,10 +3,16 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import * as S from "./TrackList.styles";
 import { getPlayList } from "../../api";
-export function MainCenterblok({ isLoading, setLoading, setCurrentTrack }) {
+export function MainCenterblok({
+  isLoading,
+  setLoading,
+  setCurrentTrack,
+  isPlaying,
+  setIsPlaying,
+}) {
   const [allTracks, setAllTracks] = useState([]);
   const [error, setError] = useState(null);
-
+  const [trackId, setTrackId] = useState();
   useEffect(() => {
     setLoading(true);
     getPlayList()
@@ -23,7 +29,14 @@ export function MainCenterblok({ isLoading, setLoading, setCurrentTrack }) {
   if (error) {
     return <div>Ошибка при получении треков: {error}</div>;
   }
+  const handleCurrentTrackId = ({ id }) => {
+    // setCurrentTrackId (id);
 
+    console.log(`currentTrack ID = ${id}`);
+
+    setTrackId(id);
+    console.log(`setCurrentTrack = ${trackId}`);
+  };
   return (
     <>
       {allTracks.map((oneTrack) => {
@@ -39,16 +52,18 @@ export function MainCenterblok({ isLoading, setLoading, setCurrentTrack }) {
                     </SkeletonTheme> */}
                 <S.TrackTitleImg>
                   {!isLoading ? (
-                    <S.TrackTitleSvg alt="music">
-                      <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-                    </S.TrackTitleSvg>
+                    isPlaying ? (
+                      <S.BlinkingDot className="track__title-svg" alt="music">
+                        {/* <use xlinkHref="img/icon/sprite.svg#icon-note"></use> */}
+                      </S.BlinkingDot>
+                    ) : (
+                      <S.TrackTitleSvg className="track__title-svg" alt="music">
+                        <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                      </S.TrackTitleSvg>
+                    )
                   ) : (
                     <Skeleton />
                   )}
-                  {/* <svg className="track__title-svg" alt="music">
-                          <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-                        </svg>
-                        </svg> */}
                 </S.TrackTitleImg>
                 <S.TrackTitleText>
                   <SkeletonTheme
@@ -59,8 +74,11 @@ export function MainCenterblok({ isLoading, setLoading, setCurrentTrack }) {
                   >
                     {!isLoading ? (
                       <S.TrackTitleLink
-                        onClick={() => setCurrentTrack(oneTrack)}
-                        href="http://"
+                        onClick={() => {
+                          setCurrentTrack(oneTrack);
+                          handleCurrentTrackId({ id: oneTrack.id });
+                          setIsPlaying(true);
+                        }}
                       >
                         {oneTrack.name} <S.TrackTitleSpan></S.TrackTitleSpan>
                       </S.TrackTitleLink>

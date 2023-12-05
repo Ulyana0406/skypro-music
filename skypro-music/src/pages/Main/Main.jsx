@@ -15,6 +15,8 @@ export const MainPage = ({
   setLoading,
   volume,
   setVolume,
+  isPlaying,
+  setIsPlaying,
 }) => {
   //setLoading(false);
   return (
@@ -42,6 +44,8 @@ export const MainPage = ({
               isLoading={isLoading}
               setLoading={setLoading}
               setCurrentTrack={setCurrentTrack}
+              isPlaying={isPlaying}
+              setIsPlaying={setIsPlaying}
             />
           </S.ContentPlayList>
         </S.MainCentrBlock>
