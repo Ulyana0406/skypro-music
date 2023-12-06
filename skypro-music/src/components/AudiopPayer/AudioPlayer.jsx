@@ -26,7 +26,9 @@ export function AudioPlayer({ volume, setVolume, isPlaying, setIsPlaying }) {
   const isSuffled = useSelector((state) => state.player.isSuffled);
 
   useEffect(() => {
-    console.log(currentTrack.track_file);
+    if (currentTrack) {
+      console.log(currentTrack.track_file);
+    }
   }, [currentTrack]);
 
   const dispatch = useDispatch();
