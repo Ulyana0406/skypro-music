@@ -125,15 +125,19 @@ export function AudioPlayer({ volume, setVolume, isPlaying, setIsPlaying }) {
           />
           <S.PlayerBlock>
             <S.BarPlayer>
-              <audio
-                className="audio"
-                controls
-                ref={audioRef}
-                autoPlay={true}
-                src={currentTrack.track_file}
-              >
-                <source type="audio/mpeg" />
-              </audio>
+              {currentTrack ? (
+                <audio
+                  className="audio"
+                  controls
+                  ref={audioRef}
+                  autoPlay={true}
+                  src={currentTrack.track_file}
+                >
+                  <source type="audio/mpeg" />
+                </audio>
+              ) : (
+                <></>
+              )}
               <S.PlayerControls>
                 <S.BtnPrev btnPrev={true} onClick={() => handlePrevTrack()}>
                   <S.BtnPrevSvg alt="prev">
@@ -263,14 +267,22 @@ export function AudioPlayer({ volume, setVolume, isPlaying, setIsPlaying }) {
                     </S.trackPlaysvg>
                   </S.trackPlayimg>
                   <S.TrackPlayAuthor>
-                    <S.TrackPlayAuthorLink href="http://">
-                      {currentTrack.name}
-                    </S.TrackPlayAuthorLink>
+                    {currentTrack ? (
+                      <S.TrackPlayAuthorLink href="http://">
+                        {currentTrack.name}
+                      </S.TrackPlayAuthorLink>
+                    ) : (
+                      <></>
+                    )}
                   </S.TrackPlayAuthor>
                   <S.TrackPlayAlbum>
-                    <S.TrackPlayAlbumLink href="http://">
-                      {currentTrack.author}
-                    </S.TrackPlayAlbumLink>
+                    {currentTrack ? (
+                      <S.TrackPlayAlbumLink href="http://">
+                        {currentTrack.author}
+                      </S.TrackPlayAlbumLink>
+                    ) : (
+                      <></>
+                    )}
                   </S.TrackPlayAlbum>
                 </S.trackPlayContain>
                 <S.TrackPlayLikeDis>
