@@ -11,6 +11,7 @@ const initialState = {
   allIds: [],
   isPlayingTrack: null,
   tracks: [],
+  isSuffled: false,
 };
 
 // 2.
@@ -34,19 +35,65 @@ export default function playerReducer(state = initialState, action) {
 
     case NEXT_TRACK: {
       const currentTrackIndex = state.tracks.findIndex(
-        (track) => track.id === state.currentTrack.id
+        (track) => track.id === state.currentTrack.content.id
       );
-      console.log(`state.tracks ${state.tracks}`);
-      console.log(`state.currentTrack ${state.currentTrack}`);
-      console.log(currentTrackIndex);
-      const newTrack = state.tracks[currentTrackIndex + 1];
-      console.log(newTrack);
-      if (!newTrack) {
+      let content = state.tracks[currentTrackIndex + 1];
+      const suffled = state.isSuffled;
+
+      if (!content) {
         return state;
       }
+
+      if (suffled) {
+        let allIds = [];
+        for (let i = 0; i < state.tracks.length; i++) {
+          allIds.push(state.tracks[i].id);
+        }
+
+        const newAllIds = allIds.sort(() => Math.random() - 0.5);
+        const randomTrackId = newAllIds[0];
+        content = state.tracks[randomTrackId];
+      }
+
       return {
         ...state,
-        currentTrack: newTrack,
+        currentTrack: { content },
+      };
+    }
+
+    case PREV_TRACK: {
+      const currentTrackIndex = state.tracks.findIndex(
+        (track) => track.id === state.currentTrack.content.id
+      );
+      let content = state.tracks[currentTrackIndex - 1];
+      const suffled = state.isSuffled;
+      if (!content) {
+        return state;
+      }
+
+      if (suffled) {
+        let allIds = [];
+        for (let i = 0; i < state.tracks.length; i++) {
+          allIds.push(state.tracks[i].id);
+        }
+
+        const newAllIds = allIds.sort(() => Math.random() - 0.5);
+        const randomTrackId = newAllIds[0];
+        content = state.tracks[randomTrackId];
+      }
+
+      return {
+        ...state,
+        currentTrack: { content },
+      };
+    }
+
+    case TOGGLE_SUFFLED: {
+      const { isSuffled } = action.payload;
+
+      return {
+        ...state,
+        isSuffled: isSuffled,
       };
     }
 

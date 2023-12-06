@@ -5,8 +5,11 @@ import { VolumeContent } from "../Volume/Volume";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import {
+  prevTrack,
+  autoNextTrack,
   nextTrack,
   setCurrentTrack,
+  toggleSuffled,
 } from "../../store/actions/creators/creators";
 import { playerSelector } from "../../store/selectors/selectors";
 export function AudioPlayer({ volume, setVolume, isPlaying, setIsPlaying }) {
@@ -20,7 +23,11 @@ export function AudioPlayer({ volume, setVolume, isPlaying, setIsPlaying }) {
   const currentTrack = useSelector(
     (state) => state.player.currentTrack.content
   );
-  const allIds = useSelector((state) => state.player.AllIds);
+  const isSuffled = useSelector((state) => state.player.isSuffled);
+
+  useEffect(() => {
+    console.log(currentTrack.track_file);
+  }, [currentTrack]);
 
   const dispatch = useDispatch();
 
@@ -58,11 +65,13 @@ export function AudioPlayer({ volume, setVolume, isPlaying, setIsPlaying }) {
     const isPlayingTrack = false;
     dispatch(setCurrentTrack(currentTrack.id, currentTrack, isPlayingTrack));
   };
-  const setShuffle = () => {
+  const handleShuffle = () => {
     if (!isShuffled) {
       setIsShuffled(true);
+      dispatch(toggleSuffled(true));
     } else {
       setIsShuffled(false);
+      dispatch(toggleSuffled(false));
     }
   };
 
@@ -82,6 +91,18 @@ export function AudioPlayer({ volume, setVolume, isPlaying, setIsPlaying }) {
   const handleNextTrack = () => {
     dispatch(nextTrack());
   };
+  const handlePrevTrack = () => {
+    dispatch(prevTrack());
+  };
+
+  // Переключаем на следующий трек при окончании текущего
+  useEffect(() => {
+    if (audioRef.current.ended) {
+      if (audioRef.current.ended === true) {
+        dispatch(nextTrack());
+      }
+    }
+  }, [currentTime]);
   return (
     <>
       <S.Bar>
@@ -92,7 +113,7 @@ export function AudioPlayer({ volume, setVolume, isPlaying, setIsPlaying }) {
               )}/${(duration / 60).toFixed(2)}`
             : `${Math.floor(currentTime / 60)}.${Math.floor(
                 currentTime % 60
-              )}/${(duration / 60).toFixed(2)}`}
+              )}/${Math.floor(duration / 60)}.${Math.floor(duration % 60)}`}
         </div>
         <S.BarContent>
           <ProgressBar
@@ -112,7 +133,7 @@ export function AudioPlayer({ volume, setVolume, isPlaying, setIsPlaying }) {
                 <source type="audio/mpeg" />
               </audio>
               <S.PlayerControls>
-                <S.BtnPrev btnPrev={true} onClick={() => functionAlert()}>
+                <S.BtnPrev btnPrev={true} onClick={() => handlePrevTrack()}>
                   <S.BtnPrevSvg alt="prev">
                     <use xlinkHref="img/icon/sprite.svg#icon-prev" />
                   </S.BtnPrevSvg>
@@ -193,7 +214,7 @@ export function AudioPlayer({ volume, setVolume, isPlaying, setIsPlaying }) {
                   </S.BtnRepeatSvg>
                 </S.BtnRepeat>
                 <S.BtnShufle>
-                  <S.BtnShufleSvg onClick={() => setShuffle()} alt="shuffle">
+                  <S.BtnShufleSvg onClick={() => handleShuffle()} alt="shuffle">
                     {isShuffled ? (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

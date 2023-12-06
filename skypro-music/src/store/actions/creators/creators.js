@@ -14,7 +14,17 @@ export const setCurrentTrack = (id, content, isPlayingTrack, allTracks) => ({
     allTracks,
   },
 });
-
 export const nextTrack = () => ({
   type: NEXT_TRACK,
+});
+
+export const prevTrack = () => ({
+  type: PREV_TRACK,
+});
+
+export const toggleSuffled = (isSuffled) => ({
+  type: TOGGLE_SUFFLED,
+  payload: {
+    isSuffled,
+  },
 });
