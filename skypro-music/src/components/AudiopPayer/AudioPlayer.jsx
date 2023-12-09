@@ -65,11 +65,13 @@ export function AudioPlayer({
     dispatch(setCurrentTrack(currentTrack.id, currentTrack, isPlayingTrack));
   };
 
-  const handleStop = () => {
+  const handleStop = (allTracks) => {
     audioRef.current.pause();
     setIsPlaying(false);
     const isPlayingTrack = false;
-    dispatch(setCurrentTrack(currentTrack.id, currentTrack, isPlayingTrack));
+    dispatch(
+      setCurrentTrack(currentTrack.id, currentTrack, isPlayingTrack, allTracks)
+    );
   };
   const handleShuffle = () => {
     if (!isShuffled) {
