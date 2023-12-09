@@ -21,6 +21,9 @@ export const MainPage = ({
 }) => {
   //setLoading(false);
   const currentTrackId = useSelector((state) => state.player.id);
+  const currentTrack = useSelector(
+    (state) => state.player.currentTrack.content
+  );
   return (
     <S.Container>
       <S.Main>
@@ -52,12 +55,15 @@ export const MainPage = ({
         </S.MainCentrBlock>
         <SideBar />
       </S.Main>
-      <AudioPlayer
-        volume={volume}
-        setVolume={setVolume}
-        isPlaying={isPlaying}
-        setIsPlaying={setIsPlaying}
-      />
+      {currentTrack && (
+        <AudioPlayer
+          volume={volume}
+          setVolume={setVolume}
+          isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
+          currentTrack={currentTrack}
+        />
+      )}
       <footer className="footer"></footer>
     </S.Container>
   );

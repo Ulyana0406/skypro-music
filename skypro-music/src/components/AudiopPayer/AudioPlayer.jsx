@@ -12,7 +12,13 @@ import {
   toggleSuffled,
 } from "../../store/actions/creators/creators";
 import { playerSelector } from "../../store/selectors/selectors";
-export function AudioPlayer({ volume, setVolume, isPlaying, setIsPlaying }) {
+export function AudioPlayer({
+  volume,
+  setVolume,
+  isPlaying,
+  setIsPlaying,
+  currentTrack,
+}) {
   const [isRepeated, setIsRepeated] = useState(false);
 
   const audioRef = useRef(null);
@@ -20,9 +26,7 @@ export function AudioPlayer({ volume, setVolume, isPlaying, setIsPlaying }) {
   const [duration, setDuration] = useState(0);
 
   const [isShuffled, setIsShuffled] = useState(false);
-  const currentTrack = useSelector(
-    (state) => state.player.currentTrack.content
-  );
+
   const isSuffled = useSelector((state) => state.player.isSuffled);
 
   useEffect(() => {
