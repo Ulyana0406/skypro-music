@@ -58,11 +58,13 @@ export function AudioPlayer({
     audioRef.current.volume = volume;
   }, [volume]);
 
-  const handleStart = () => {
+  const handleStart = (allTracks) => {
     audioRef.current.play();
     setIsPlaying(true);
     const isPlayingTrack = true;
-    dispatch(setCurrentTrack(currentTrack.id, currentTrack, isPlayingTrack));
+    dispatch(
+      setCurrentTrack(currentTrack.id, currentTrack, isPlayingTrack, allTracks)
+    );
   };
 
   const handleStop = (allTracks) => {
@@ -89,10 +91,6 @@ export function AudioPlayer({
     } else {
       setIsRepeated(false);
     }
-  };
-
-  const functionAlert = () => {
-    alert("Функция еще не реализована");
   };
 
   const togglePlay = isPlaying ? handleStop : handleStart;
@@ -131,19 +129,16 @@ export function AudioPlayer({
           />
           <S.PlayerBlock>
             <S.BarPlayer>
-              {currentTrack ? (
-                <audio
-                  className="audio"
-                  controls
-                  ref={audioRef}
-                  autoPlay={true}
-                  src={currentTrack.track_file}
-                >
-                  <source type="audio/mpeg" />
-                </audio>
-              ) : (
-                <></>
-              )}
+              <audio
+                className="audio"
+                controls
+                ref={audioRef}
+                autoPlay={true}
+                src={currentTrack.track_file}
+              >
+                <source type="audio/mpeg" />
+              </audio>
+
               <S.PlayerControls>
                 <S.BtnPrev btnPrev={true} onClick={() => handlePrevTrack()}>
                   <S.BtnPrevSvg alt="prev">
@@ -273,22 +268,14 @@ export function AudioPlayer({
                     </S.trackPlaysvg>
                   </S.trackPlayimg>
                   <S.TrackPlayAuthor>
-                    {currentTrack ? (
-                      <S.TrackPlayAuthorLink href="http://">
-                        {currentTrack.name}
-                      </S.TrackPlayAuthorLink>
-                    ) : (
-                      <></>
-                    )}
+                    <S.TrackPlayAuthorLink href="http://">
+                      {currentTrack.name}
+                    </S.TrackPlayAuthorLink>
                   </S.TrackPlayAuthor>
                   <S.TrackPlayAlbum>
-                    {currentTrack ? (
-                      <S.TrackPlayAlbumLink href="http://">
-                        {currentTrack.author}
-                      </S.TrackPlayAlbumLink>
-                    ) : (
-                      <></>
-                    )}
+                    <S.TrackPlayAlbumLink href="http://">
+                      {currentTrack.author}
+                    </S.TrackPlayAlbumLink>
                   </S.TrackPlayAlbum>
                 </S.trackPlayContain>
                 <S.TrackPlayLikeDis>
