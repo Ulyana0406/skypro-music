@@ -104,9 +104,9 @@ export function AudioPlayer({
   // Переключаем на следующий трек при окончании текущего
   useEffect(() => {
     if (audioRef.current.ended) {
-      if (audioRef.current.ended === true) {
-        dispatch(nextTrack());
-      }
+      !isRepeated && dispatch(nextTrack());
+      isRepeated && setCurrentTime(0);
+      isRepeated && audioRef.current.play();
     }
   }, [currentTime]);
   return (
