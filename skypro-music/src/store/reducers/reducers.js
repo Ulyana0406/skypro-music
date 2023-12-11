@@ -67,6 +67,7 @@ export default function playerReducer(state = initialState, action) {
       );
       let content = state.tracks[currentTrackIndex - 1];
       const suffled = state.isSuffled;
+
       if (!content) {
         return state;
       }
@@ -89,11 +90,10 @@ export default function playerReducer(state = initialState, action) {
     }
 
     case TOGGLE_SUFFLED: {
-      const { isSuffled } = action.payload;
-
       return {
         ...state,
-        isSuffled: isSuffled,
+        isSuffled: !state.isSuffled,
+        shuffledPlaylist: [...state.tracks].sort(() => 0.5 - Math.random()),
       };
     }
 
