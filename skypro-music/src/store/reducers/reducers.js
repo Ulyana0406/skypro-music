@@ -34,25 +34,14 @@ export default function playerReducer(state = initialState, action) {
     }
 
     case NEXT_TRACK: {
-      const currentTrackIndex = state.tracks.findIndex(
+      const playlist = state.isSuffled ? state.shuffledPlaylist : state.tracks;
+      const currentTrackIndex = playlist.findIndex(
         (track) => track.id === state.currentTrack.content.id
       );
-      let content = state.tracks[currentTrackIndex + 1];
-      const suffled = state.isSuffled;
+      let content = playlist[currentTrackIndex + 1];
 
       if (!content) {
         return state;
-      }
-
-      if (suffled) {
-        let allIds = [];
-        for (let i = 0; i < state.tracks.length; i++) {
-          allIds.push(state.tracks[i].id);
-        }
-
-        const newAllIds = allIds.sort(() => Math.random() - 0.5);
-        const randomTrackId = newAllIds[0];
-        content = state.tracks[randomTrackId];
       }
 
       return {
@@ -62,25 +51,14 @@ export default function playerReducer(state = initialState, action) {
     }
 
     case PREV_TRACK: {
-      const currentTrackIndex = state.tracks.findIndex(
+      const playlist = state.isSuffled ? state.shuffledPlaylist : state.tracks;
+      const currentTrackIndex = playlist.findIndex(
         (track) => track.id === state.currentTrack.content.id
       );
-      let content = state.tracks[currentTrackIndex - 1];
-      const suffled = state.isSuffled;
+      let content = playlist[currentTrackIndex - 1];
 
       if (!content) {
         return state;
-      }
-
-      if (suffled) {
-        let allIds = [];
-        for (let i = 0; i < state.tracks.length; i++) {
-          allIds.push(state.tracks[i].id);
-        }
-
-        const newAllIds = allIds.sort(() => Math.random() - 0.5);
-        const randomTrackId = newAllIds[0];
-        content = state.tracks[randomTrackId];
       }
 
       return {
