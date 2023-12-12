@@ -29,7 +29,9 @@ export function Login() {
       login(data);
       navigate("/");
     } catch (error) {
-      setError("Ошибка входа");
+      setError(
+        "Упс... что-то пошло не так. Мы уже работаем над этим! Попробуйте позже "
+      );
     }
   };
 
