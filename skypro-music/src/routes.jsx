@@ -11,10 +11,10 @@ import { Login } from "./pages/Login/Login";
 export const AppRoutes = ({
   isLoading,
   setLoading,
-  currentTrack,
-  setCurrentTrack,
   volume,
   setVolume,
+  isPlaying,
+  setIsPlaying,
 }) => {
   return (
     <Routes>
@@ -29,10 +29,10 @@ export const AppRoutes = ({
             <MainPage
               isLoading={isLoading}
               setLoading={setLoading}
-              currentTrack={currentTrack}
-              setCurrentTrack={setCurrentTrack}
               volume={volume}
               setVolume={setVolume}
+              isPlaying={isPlaying}
+              setIsPlaying={setIsPlaying}
             />
           }
         />

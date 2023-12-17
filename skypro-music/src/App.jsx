@@ -14,8 +14,8 @@ export const useUser = () => useContext(UserContext);
 function App() {
   //localStorage.setItem("user");
   const [isLoading, setLoading] = useState(false);
-  const [currentTrack, setCurrentTrack] = useState([]);
-
+  //const [currentTrack, setCurrentTrack] = useState([]);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.4);
 
   return (
@@ -24,10 +24,10 @@ function App() {
         <AppRoutes
           isLoading={isLoading}
           setLoading={setLoading}
-          currentTrack={currentTrack}
-          setCurrentTrack={setCurrentTrack}
           volume={volume}
           setVolume={setVolume}
+          isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
         />
         <GlobalStyle />
       </S.Wrapper>

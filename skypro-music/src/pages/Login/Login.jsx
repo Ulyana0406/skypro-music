@@ -10,6 +10,10 @@ export function Login() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const handleLogin = async () => {
+    if (!email || !password) {
+      setError("Email и пароль не могут быть пустыми");
+      return;
+    }
     try {
       const response = await fetch(
         "	https://skypro-music-api.skyeng.tech/user/login/",
@@ -25,7 +29,9 @@ export function Login() {
       login(data);
       navigate("/");
     } catch (error) {
-      setError("Ошибка входа");
+      setError(
+        "Упс... что-то пошло не так. Мы уже работаем над этим! Попробуйте позже "
+      );
     }
   };
 
