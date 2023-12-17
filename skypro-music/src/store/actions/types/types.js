@@ -3,3 +3,4 @@ export const NEXT_TRACK = "NEXT_TRACK";
 export const PREV_TRACK = "PREV_TRACK";
 export const TOGGLE_SUFFLED = "TOGGLE_SUFFLED";
 export const AUTO_NEXT_TRACK = "AUTO_NEXT_TRACK";
+export const ALL_TRACKS_LOADING = "ALL_TRACKS_LOADING";

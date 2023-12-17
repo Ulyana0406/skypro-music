@@ -3,6 +3,7 @@ import {
   NEXT_TRACK,
   PREV_TRACK,
   TOGGLE_SUFFLED,
+  ALL_TRACKS_LOADING,
 } from "../actions/types/types";
 
 // 1.
@@ -72,6 +73,13 @@ export default function playerReducer(state = initialState, action) {
         ...state,
         isSuffled: !state.isSuffled,
         shuffledPlaylist: [...state.tracks].sort(() => 0.5 - Math.random()),
+      };
+    }
+    case ALL_TRACKS_LOADING: {
+      const { allTracks } = action.payload;
+      return {
+        ...state,
+        tracks: allTracks,
       };
     }
 

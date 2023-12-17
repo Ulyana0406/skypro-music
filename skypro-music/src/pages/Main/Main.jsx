@@ -6,6 +6,10 @@ import { Search } from "./../../components/Search/Search";
 import { Filter } from "./../../components/FIlter/Filter";
 import * as S from "./../../App.styles";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getPlayList } from "../../api";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { playerSelector } from "../../store/selectors/selectors";
 //import { getPlayList } from "../../api";
 //import { useState, useEffect } from "react";
@@ -19,11 +23,30 @@ export const MainPage = ({
   isPlaying,
   setIsPlaying,
 }) => {
-  //setLoading(false);
-  const currentTrackId = useSelector((state) => state.player.id);
+  const dispatch = useDispatch();
+  const [allTracks, setAllTracks] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  const [error, setError] = useState(null);
   const currentTrack = useSelector(
     (state) => state.player.currentTrack.content
   );
+  useEffect(() => {
+    setLoading(true);
+    getPlayList()
+      .then((lists) => {
+        setAllTracks(lists);
+      })
+      .finally(() =>
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000)
+      )
+      .catch((error) => setError(error.message));
+  }, []);
+  if (error) {
+    return <div>Ошибка при получении треков: {error}</div>;
+  }
+  //setLoading(false);
+
   return (
     <S.Container>
       <S.Main>
@@ -55,15 +78,7 @@ export const MainPage = ({
         </S.MainCentrBlock>
         <SideBar />
       </S.Main>
-      {currentTrack && (
-        <AudioPlayer
-          volume={volume}
-          setVolume={setVolume}
-          isPlaying={isPlaying}
-          setIsPlaying={setIsPlaying}
-          currentTrack={currentTrack}
-        />
-      )}
+
       <footer className="footer"></footer>
     </S.Container>
   );

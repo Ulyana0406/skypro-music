@@ -7,7 +7,8 @@ import GlobalStyle from "./globalStyles";
 import { AppRoutes } from "./routes";
 import { useState } from "react";
 import { useContext, createContext } from "react";
-
+import { useSelector } from "react-redux";
+import { AudioPlayer } from "./components/AudiopPayer/AudioPlayer";
 //const S. = S..div``
 export const UserContext = createContext();
 export const useUser = () => useContext(UserContext);
@@ -17,7 +18,9 @@ function App() {
   //const [currentTrack, setCurrentTrack] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.4);
-
+  const currentTrack = useSelector(
+    (state) => state.player.currentTrack.content
+  );
   return (
     <WithAuth>
       <S.Wrapper>
@@ -29,6 +32,15 @@ function App() {
           isPlaying={isPlaying}
           setIsPlaying={setIsPlaying}
         />
+        {currentTrack && (
+          <AudioPlayer
+            volume={volume}
+            setVolume={setVolume}
+            isPlaying={isPlaying}
+            setIsPlaying={setIsPlaying}
+            currentTrack={currentTrack}
+          />
+        )}
         <GlobalStyle />
       </S.Wrapper>
     </WithAuth>

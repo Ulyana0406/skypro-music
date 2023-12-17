@@ -18,33 +18,28 @@ export function MainCenterblok({
 }) {
   const [allTracks, setAllTracks] = useState([]);
   const [error, setError] = useState(null);
+  const [liked, isLiked] = useState(true);
   const [trackId, setTrackId] = useState();
   const dispatch = useDispatch();
+  const baseAllTracks = useSelector((state) => state.player.tracks);
   const currentTrack = useSelector(
     (state) => state.player.currentTrack.content
   );
   const isCurrentTrackPlaying = useSelector(
     (state) => state.player.isPlayingTrack
   );
-  useEffect(() => {
-    setLoading(true);
-    getPlayList()
-      .then((lists) => {
-        setAllTracks(lists);
-      })
-      .finally(() =>
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000)
-      )
-      .catch((error) => setError(error.message));
-  }, []);
-  if (error) {
-    return <div>Ошибка при получении треков: {error}</div>;
-  }
+
   const handleCurrentTrackId = (oneTrack) => {
     const isPlayingTrack = true;
-    dispatch(setCurrentTrack(oneTrack.id, oneTrack, isPlayingTrack, allTracks));
+    dispatch(
+      setCurrentTrack(
+        oneTrack.id,
+        oneTrack,
+        isPlayingTrack,
+        allTracks,
+        baseAllTracks
+      )
+    );
   };
 
   const setPlayItemImage = (oneTrack) => {
@@ -66,9 +61,36 @@ export function MainCenterblok({
       );
     }
   };
+
+  const setLiked = (oneTrack) => {
+    if (!liked && currentTrack?.id === oneTrack?.id) {
+      return (
+        <svg
+          width="16"
+          height="14"
+          viewBox="0 0 16 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7.99997 2.25572H8.02154C8.95343 1.44175 11.4125 0.165765 13.6127 1.76734C16.9673 4.20921 13.902 9.5 8.02154 13H7.99997M8.00003 2.25572H7.97846C7.04657 1.44175 4.58746 0.165765 2.38727 1.76734C-0.967302 4.20921 2.09797 9.5 7.97846 13H8.00003"
+            stroke="#707070"
+          />
+        </svg>
+      );
+    }
+    if (liked && currentTrack?.id === oneTrack?.id) {
+    } else {
+      return (
+        <S.PlayLikeSvg alt="like">
+          <use xlinkHref="img/icon/sprite.svg#icon-like" />
+        </S.PlayLikeSvg>
+      );
+    }
+  };
   return (
     <>
-      {allTracks.map((oneTrack) => {
+      {baseAllTracks.map((oneTrack) => {
         return (
           <S.PlayListItem key={oneTrack.id}>
             <S.PlayListTrack>
@@ -142,6 +164,11 @@ export function MainCenterblok({
                     : "0.00"}
                 </S.TrackTimeText>
               </S.TrackTime>
+              <S.TrackPlayLike
+                onClick={() => {
+                  setLiked(oneTrack);
+                }}
+              ></S.TrackPlayLike>
             </S.PlayListTrack>
           </S.PlayListItem>
         );

@@ -5,6 +5,20 @@ export const PlayListItem = styled.div`
   display: block;
   margin-bottom: 12px;
 `;
+export const PlayLikeSvg = styled.svg`
+  width: 14px;
+  height: 12px;
+  fill: transparent;
+  stroke: #696969;
+`;
+export const TrackPlayLike = styled.div`
+  padding: 5px;
+  &:hover svg {
+    fill: transparent;
+    stroke: #acacac;
+    cursor: pointer;
+  }
+`;
 export const PlayListTrack = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;

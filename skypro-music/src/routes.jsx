@@ -22,7 +22,19 @@ export const AppRoutes = ({
       <Route path="/registr" element={<Register />} />
       <Route path="/signin" element={<Login />} />
       <Route element={<ProtectedRoute />}>
-        <Route path="/myplaylist" element={<MyPlaylist />} />
+        <Route
+          path="/myplaylist"
+          element={
+            <MyPlaylist
+              volume={volume}
+              setVolume={setVolume}
+              isPlaying={isPlaying}
+              setIsPlaying={setIsPlaying}
+              isLoading={isLoading}
+              setLoading={setLoading}
+            />
+          }
+        />
         <Route
           path="/"
           element={
