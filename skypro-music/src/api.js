@@ -2,15 +2,15 @@ export async function getPlayList() {
   const Response = await fetch(
     "https://skypro-music-api.skyeng.tech/catalog/track/all/"
   );
+  console.log(Response);
 
-  if (!Response.ok) {
-    if (Response.status === 500) {
-      throw new Error("Ошибка сервера");
-    }
+  if (Response.ok) {
+    const data = await Response.json();
+    console.log(data);
+    return data;
+  } else {
+    throw new Error("Ошибка сервера");
   }
-
-  const data = await Response.json();
-  return data;
 }
 export const register = async ({ email, password }) => {
   try {
