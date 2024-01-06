@@ -26,9 +26,9 @@ export const MainPage = ({
   const dispatch = useDispatch();
   const [allTracks, setAllTracks] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
   const [error, setError] = useState(null);
-  const currentTrack = useSelector(
-    (state) => state.player.currentTrack.content
-  );
+  // const currentTrack = useSelector(
+  //   (state) => state.player.currentTrack.content
+  // );
   useEffect(() => {
     setLoading(true);
     getPlayList()
@@ -78,7 +78,15 @@ export const MainPage = ({
         </S.MainCentrBlock>
         <SideBar />
       </S.Main>
-
+      {/* {currentTrack && (
+        <AudioPlayer
+          volume={volume}
+          setVolume={setVolume}
+          isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
+          currentTrack={currentTrack}
+        />
+      )} */}
       <footer className="footer"></footer>
     </S.Container>
   );

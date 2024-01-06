@@ -7,9 +7,7 @@ export function SighInButton() {
   const [buttonInnerText, setButtonInnerText] = useState("Войти");
   const isAllowed = useAuth();
   useEffect(() => {
-    isAllowed.auth === null && setButtonInnerText("Войти");
     isAllowed.auth !== null && setButtonInnerText("Выйти");
-    isAllowed.auth !== null && localStorage.clear();
   }, [useAuth]);
   return (
     <S.MenuItem>

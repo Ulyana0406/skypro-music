@@ -1,15 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import * as S from "./TrackList.styles";
 import { getPlayList } from "../../api";
 import { useSelector } from "react-redux";
-import { playerSelector } from "../../store/selectors/selectors";
 import { useDispatch } from "react-redux";
-import {
-  nextTrack,
-  setCurrentTrack,
-} from "../../store/actions/creators/creators";
+import { setCurrentTrack } from "../../store/track/trackSlice";
+
 export function MainCenterblok({
   isLoading,
   setLoading,
@@ -17,9 +14,8 @@ export function MainCenterblok({
   setIsPlaying,
 }) {
   const [allTracks, setAllTracks] = useState([]);
-  const [error, setError] = useState(null);
   const [liked, isLiked] = useState(true);
-  const [trackId, setTrackId] = useState();
+
   const dispatch = useDispatch();
   const baseAllTracks = useSelector((state) => state.player.tracks);
   const currentTrack = useSelector(

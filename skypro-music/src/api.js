@@ -2,15 +2,15 @@ export async function getPlayList() {
   const Response = await fetch(
     "https://skypro-music-api.skyeng.tech/catalog/track/all/"
   );
-  console.log(Response);
 
-  if (Response.ok) {
-    const data = await Response.json();
-    console.log(data);
-    return data;
-  } else {
-    throw new Error("Ошибка сервера");
+  if (!Response.ok) {
+    if (Response.status === 500) {
+      throw new Error("Ошибка сервера");
+    }
   }
+
+  const data = await Response.json();
+  return data;
 }
 export const register = async ({ email, password }) => {
   try {
@@ -31,5 +31,23 @@ export const register = async ({ email, password }) => {
     return response;
   } catch (error) {
     return error;
+  }
+};
+
+export const loginApi = async ({ email, password }) => {
+  try {
+    const response = await fetch(
+      "https://skypro-music-api.skyeng.tech/user/login/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      }
+    );
+    return response.json();
+  } catch (error) {
+    throw new Error(error);
   }
 };

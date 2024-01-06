@@ -3,36 +3,25 @@ import * as S from "./AuthPage.styles";
 import { useState } from "react";
 import { useAuth } from "../../auth";
 import { useNavigate } from "react-router-dom";
+import { loginApi } from "../../api";
+
 export function Login() {
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
   const handleLogin = async () => {
     if (!email || !password) {
       setError("Email и пароль не могут быть пустыми");
       return;
     }
-    try {
-      const response = await fetch(
-        "	https://skypro-music-api.skyeng.tech/user/login/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
-      const data = await response.json();
-      login(data);
-      navigate("/");
-    } catch (error) {
-      setError(
-        "Упс... что-то пошло не так. Мы уже работаем над этим! Попробуйте позже "
-      );
-    }
+
+    const response = await loginApi({ email, password });
+
+    login(response);
+    navigate("/");
   };
 
   return (

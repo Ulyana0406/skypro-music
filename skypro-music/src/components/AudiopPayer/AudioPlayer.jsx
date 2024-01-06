@@ -6,12 +6,11 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import {
   prevTrack,
-  autoNextTrack,
   nextTrack,
   setCurrentTrack,
   toggleSuffled,
 } from "../../store/actions/creators/creators";
-import { playerSelector } from "../../store/selectors/selectors";
+//import { playerSelector } from "../../store/selectors/selectors";
 export function AudioPlayer({
   volume,
   setVolume,

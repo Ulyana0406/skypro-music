@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import playerReducer from "./reducers/reducers";
+import trackReducer from "./track/trackSlice";
 
 export const store = configureStore({
   reducer: {
-    player: playerReducer,
+    trackReducer,
   },
 });

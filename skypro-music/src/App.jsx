@@ -8,7 +8,8 @@ import { AppRoutes } from "./routes";
 import { useState } from "react";
 import { useContext, createContext } from "react";
 import { useSelector } from "react-redux";
-import { AudioPlayer } from "./components/AudiopPayer/AudioPlayer";
+// import { AudioPlayer } from "./components/AudiopPayer/AudioPlayer";
+import { ReduxProvider } from "./store/provider";
 //const S. = S..div``
 export const UserContext = createContext();
 export const useUser = () => useContext(UserContext);
@@ -18,32 +19,25 @@ function App() {
   //const [currentTrack, setCurrentTrack] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.4);
-  const currentTrack = useSelector(
-    (state) => state.player.currentTrack.content
-  );
+  const currentTrack = useSelector((state) => state.trackReducer);
+  console.log(currentTrack);
   return (
-    <WithAuth>
-      <S.Wrapper>
-        <AppRoutes
-          isLoading={isLoading}
-          setLoading={setLoading}
-          volume={volume}
-          setVolume={setVolume}
-          isPlaying={isPlaying}
-          setIsPlaying={setIsPlaying}
-        />
-        {currentTrack && (
-          <AudioPlayer
+    <ReduxProvider>
+      <WithAuth>
+        <S.Wrapper>
+          <AppRoutes
+            isLoading={isLoading}
+            setLoading={setLoading}
             volume={volume}
             setVolume={setVolume}
             isPlaying={isPlaying}
             setIsPlaying={setIsPlaying}
-            currentTrack={currentTrack}
           />
-        )}
-        <GlobalStyle />
-      </S.Wrapper>
-    </WithAuth>
+
+          <GlobalStyle />
+        </S.Wrapper>
+      </WithAuth>
+    </ReduxProvider>
   );
 }
 
