@@ -1,9 +1,7 @@
 const baseURL = " https://skypro-music-api.skyeng.tech";
 
 export async function getAllTracks() {
-  const response = await fetch(
-    `${baseURL}/catalog/track/all/`
-  );
+  const response = await fetch(`${baseURL}/catalog/track/all/`);
   if (!response.ok) {
     throw new Error("Ошибка сервера");
   }
@@ -11,7 +9,7 @@ export async function getAllTracks() {
   return data;
 }
 
-export async function login({ email, password }) {
+export async function loginApi({ email, password }) {
   const response = await fetch(
     "https://skypro-music-api.skyeng.tech/user/login/",
     {
@@ -19,7 +17,6 @@ export async function login({ email, password }) {
       body: JSON.stringify({
         email: email,
         password: password,
-        username: email,
       }),
       headers: {
         // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
@@ -42,7 +39,6 @@ export async function signUp({ email, password }) {
       body: JSON.stringify({
         email: email,
         password: password,
-        username: email,
       }),
       headers: {
         // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
@@ -102,8 +98,8 @@ export async function addFavoriteTrack(trackId, accessToken) {
     throw new Error("Сервер не отвечает");
   }
   if (response.status === 401) {
-      localStorage.removeItem("authData")
-      window.location.href="/login"
+    localStorage.removeItem("authData");
+    window.location.href = "/login";
     //throw new Error("Токен не действителен");
   }
 
@@ -114,19 +110,17 @@ export async function addFavoriteTrack(trackId, accessToken) {
 export async function getFavoriteTracks(token) {
   const response = await fetch(
     "https://skypro-music-api.skyeng.tech/catalog/track/favorite/all/",
-    { 
-    method: "GET", 
-    headers: { Authorization: `Bearer ${token}` }, 
-  }
-  )
-  const tracks = await response.json()
-  return tracks
+    {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+  const tracks = await response.json();
+  return tracks;
 }
 
 export async function getCatalog_1() {
-  const response = await fetch(
-    `${baseURL}/catalog/selection/1/`
-  );
+  const response = await fetch(`${baseURL}/catalog/selection/1/`);
   if (!response.ok) {
     throw new Error("Ошибка сервера");
   }
@@ -135,9 +129,7 @@ export async function getCatalog_1() {
 }
 
 export async function getCatalog_2() {
-  const response = await fetch(
-    `${baseURL}/catalog/selection/2/`
-  );
+  const response = await fetch(`${baseURL}/catalog/selection/2/`);
   if (!response.ok) {
     throw new Error("Ошибка сервера");
   }
@@ -146,9 +138,7 @@ export async function getCatalog_2() {
 }
 
 export async function getCatalog_3() {
-  const response = await fetch(
-    `${baseURL}/catalog/selection/3/`
-  );
+  const response = await fetch(`${baseURL}/catalog/selection/3/`);
   if (!response.ok) {
     throw new Error("Ошибка сервера");
   }
@@ -176,8 +166,8 @@ export async function removeFavoriteTracks(trackId, accessToken) {
     throw new Error("Сервер не отвечает");
   }
   if (response.status === 401) {
-    localStorage.removeItem("authData")
-    window.location.href="/login"
+    localStorage.removeItem("authData");
+    window.location.href = "/login";
   }
 
   const data = await response.json();
