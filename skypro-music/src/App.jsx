@@ -1,43 +1,51 @@
-//import React, { useState } from "react";
-import "./App.css";
-//import Cookies from "js-cookie";
-import * as S from "./App.styles";
-import { WithAuth } from "./auth";
-import GlobalStyle from "./globalStyles";
-import { AppRoutes } from "./routes";
-import { useState } from "react";
-import { useContext, createContext } from "react";
-import { useSelector } from "react-redux";
-// import { AudioPlayer } from "./components/AudiopPayer/AudioPlayer";
-import { ReduxProvider } from "./store/provider";
-//const S. = S..div``
-export const UserContext = createContext();
-export const useUser = () => useContext(UserContext);
-function App() {
-  //localStorage.setItem("user");
-  const [isLoading, setLoading] = useState(false);
-  //const [currentTrack, setCurrentTrack] = useState([]);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.4);
-  const currentTrack = useSelector((state) => state.trackReducer);
-  console.log(currentTrack);
-  return (
-    <ReduxProvider>
-      <WithAuth>
-        <S.Wrapper>
-          <AppRoutes
-            isLoading={isLoading}
-            setLoading={setLoading}
-            volume={volume}
-            setVolume={setVolume}
-            isPlaying={isPlaying}
-            setIsPlaying={setIsPlaying}
-          />
+import { AppRoutes } from "./routers";
+import { createGlobalStyle } from "styled-components";
+import React from "react";
+import { useState, useEffect } from "react";
+import { getAllTracks } from "./api/api";
+import Context from "./context";
 
-          <GlobalStyle />
-        </S.Wrapper>
-      </WithAuth>
-    </ReduxProvider>
+const GlobalStyle = createGlobalStyle`
+  *{
+    margin: 0;
+    padding: 0;
+  }
+`;
+
+function App() {
+  const [user, setUser] = useState(localStorage.getItem("user") || null);
+  const [tracks, setTracks] = useState([]);
+  const [loading, setloading] = useState(false);
+  const [tracksError, setTracksError] = useState(null);
+  const [isPlaylist, setPlaylist] = useState();
+  const [isLiked, setIsLiked] = useState(false);
+
+  useEffect(() => {
+    async function Tracks() {
+      try {
+        setloading(true);
+        setTracksError(null);
+        await getAllTracks().then((tracks) => {
+          setTracks(tracks);
+          setPlaylist(tracks)
+          console.log(tracks)
+        });
+      } catch (error) {
+        setTracksError(error.message);
+      } finally {
+        setloading(false);
+      }
+    }
+    Tracks();
+  }, []);
+
+  return (
+    <>
+      <Context.Provider value={{ user, setUser, loading, tracks, tracksError, isPlaylist, setPlaylist, setTracksError, setloading, setTracks, isLiked, setIsLiked }}>
+        <GlobalStyle />
+        <AppRoutes />
+      </Context.Provider>
+    </>
   );
 }
 
