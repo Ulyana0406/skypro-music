@@ -1,13 +1,12 @@
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import * as S from "./Sidebar.styles";
+import * as S from "./SideBar.styles";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import Context from "../../context";
 
 function Sidebar({ loading }) {
-  // const userAuthdata = localStorage.getItem("authData");
-  // console.log(userAuthdata);
+  const authData = JSON.parse(localStorage.getItem("authData"));
   function logOut() {
     localStorage.removeItem("authData");
     window.location.href = "/login";
@@ -16,9 +15,7 @@ function Sidebar({ loading }) {
   return (
     <S.MainSidebar>
       <S.SidebarPersonal>
-        <S.SidebarPersonalName>
-          {/* {userAuthdata["user"]} */}
-        </S.SidebarPersonalName>
+        <S.SidebarPersonalName>{authData.user.username}</S.SidebarPersonalName>
         <S.SidebarIcon onClick={logOut}>
           <svg alt="logout">
             <use xlinkHref="/img/icon/sprite.svg#logout"></use>

@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setAlltracks, tracksRedux } from "../store/slices/trackSlice";
 import { setAccess, setRefresh, setUserData } from "../store/slices/authSlice";
-import { Filter } from "../components/Filter/Filter";
+
 
 export const Main = () => {
   const { loading, tracks, tracksError, setPlaylist } = useContext(Context);
@@ -58,7 +58,7 @@ export const Main = () => {
     <>
         <GlobalStyle />
         <S.centoblockTittle>Треки</S.centoblockTittle>
-        <Filter />
+       
         {tracksError ? (
           <p>Не удалось загрузить плейлист, попробуйте позже</p>
         ) : (

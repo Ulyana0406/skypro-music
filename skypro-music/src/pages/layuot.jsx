@@ -23,9 +23,8 @@ export const Layout = () => {
           <NavMenu user={user} setUser={setUser} />
           <S.centroblock>
             <Search />
-            
-            <Outlet />
 
+            <Outlet />
           </S.centroblock>
           <Sidebar loading={loading} />
         </S.main>

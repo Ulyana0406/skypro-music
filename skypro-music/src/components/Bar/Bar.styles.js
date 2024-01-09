@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const Bar = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -88,7 +88,7 @@ export const PlayerBtnRepeatActiveSvg = styled.svg`
   height: 12px;
   fill: transparent;
   stroke: #ffffff;
-  &:hover  {
+  &:hover {
     fill: transparent;
     stroke: #ffffff;
   }
@@ -115,11 +115,11 @@ export const BarPlayerBtnIconHover = styled(
   PlayerBtnRepeat,
   BarPlayerBtnShuffle
 )`
-&:hover svg {
-  fill: transparent;
-  stroke: #acacac;
-  cursor: pointer;
-}
+  &:hover svg {
+    fill: transparent;
+    stroke: #acacac;
+    cursor: pointer;
+  }
 `;
 export const BarPlayerBtnPlaySvg = styled.svg`
   width: 22px;
@@ -151,7 +151,7 @@ export const BarPlayerBtnShuffleActiveSvg = styled.svg`
   height: 12px;
   fill: transparent;
   stroke: #ffffff;
-  &:hover  {
+  &:hover {
     fill: transparent;
     stroke: #ffffff;
   }
@@ -306,9 +306,9 @@ export const VolumeProgressLine = styled.input`
   width: 109px;
 `;
 export const TimeCode = styled.div`
-    color: #696969;
-    text-align: end;
-    margin: 10px 50px 10px;
+  color: #696969;
+  text-align: end;
+  margin: 10px 50px 10px;
 `;
 export const StyledProgressInput = styled.input`
   --progress-height: 8px;
@@ -370,4 +370,4 @@ export const TrackTimeSvg = styled.svg`
   margin-right: 17px;
   fill: transparent;
   stroke: #696969;
-`
+`;

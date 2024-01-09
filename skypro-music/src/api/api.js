@@ -39,6 +39,7 @@ export async function signUp({ email, password }) {
       body: JSON.stringify({
         email: email,
         password: password,
+        username: email,
       }),
       headers: {
         // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
