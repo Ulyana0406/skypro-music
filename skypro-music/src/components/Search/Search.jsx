@@ -1,11 +1,28 @@
-import * as S from "./Search.styles";
-export function Search() {
+import React from "react";
+import * as S from "./Search.styles"
+import { useDispatch } from 'react-redux'
+import { setFiltersPlaylist } from "../../store/slices/trackSlice";
+
+function Search() {
+  const dispatch = useDispatch()
   return (
-    <S.CenterSearch>
-      <S.Svg>
+    <S.centroblockSearch>
+      <S.searchSvg>
         <use xlinkHref="img/icon/sprite.svg#icon-search"></use>
-      </S.Svg>
-      <S.Text type="search" placeholder="Поиск" name="search" />
-    </S.CenterSearch>
+      </S.searchSvg>
+      <S.searchText
+        type="search"
+        placeholder="Поиск"
+        name="search"
+        onChange={(e) => {
+          dispatch(
+            setFiltersPlaylist({
+              search: e.target.value,
+            })
+          )
+        }}
+      />
+    </S.centroblockSearch>
   );
 }
+export default Search;
